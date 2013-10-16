@@ -10,7 +10,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Darting-around by bazscott</title>
+    <title>DARTing-Around by bazscott</title>
   </head>
 
   <body>
@@ -18,8 +18,8 @@
       <div class="inner">
 
         <header>
-          <h1>Darting-around</h1>
-          <h2>DARTing-Around</h2>
+          <h1>DARTing-Around</h1>
+          <h2>Developer Diary</h2>
         </header>
 
         <section id="downloads" class="clearfix">
@@ -31,41 +31,47 @@
         <hr>
 
         <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+          <p>Welcome to the DARTing-Around Developer Diary!</p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Want to beta test this? Of course you do but spaces are very limited! Contact me and I'll arrange it if I can. It'll make it easier if you have an account with Hockey App.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>If you want to watch the progress of this app in the style of tickets - I'm using GitHub Issues to track the detail of the work so have a look over there.</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="day-1--day" class="anchor" href="#day-1--day"><span class="octicon octicon-link"></span></a>Day 1 / Day</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>This thing started on 14 October 2013 when I asked on Twitter if there were any good apps for getting train times for the Dublin DART trains. <a href="https://twitter.com/ncremins">@ncremins</a>, <a href="https://twitter.com/adamkmccarthy">@adamkmccarthy</a>, <a href="https://twitter.com/oisin">@oisin</a> and I then had a discussion about the fact that there wasn't (that we were aware of) but that an API did exist. Oisin has actually done some work on this with a <a href="https://github.com/oisin/ierail">ruby wrapper for the API</a></p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>This is the documentation for the API itself: <a href="http://api.irishrail.ie/realtime/">Irish Rail Realtime API</a></p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>So during the day I thought I'd have a go at this, and that I would document the process for everyone to see. So, hi :)</p>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="day-1--night" class="anchor" href="#day-1--night"><span class="octicon octicon-link"></span></a>Day 1 / Night</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>I got started at night on this app and had a basic app talking to the Irish Rail server via their API within an hour or so. The only tricky part was that the server thinks it's 1998 so is using XML. I haven't parsed XML for years so had to go back and find out how to do that.</p>
+
+<p>There are a few other things I want to achieve with this project that I am also going to use it for so I started on those too:</p>
+
+<ul>
+<li>Learn Cocoapods (I know Ruby pretty well, so this is fairly easy)</li>
+<li>Use autolayout, properly this time!</li>
+<li>Run this through the new Continuous Integration setup on Xcode 5 and Mac OS X Server</li>
+<li>Set up Mixpanel properly for stats (that will come later)</li>
+</ul><p>I CANNOT work on app without a name and a logo, so I had to spend an hour coming up with these too, I went to the hotel bar and did this over dinner. They may well change but they'll do for now :) By the end of the night "DARTing Around" was running and pulling in station data. It even displayed the station name on the detail screen if you tapped on a table cell. Good start but I had a new series of The Walking Dead to get started on so the rest will have to wait until tomorrow.</p>
+
+<h3>
+<a name="day-2--night-tuesday" class="anchor" href="#day-2--night-tuesday"><span class="octicon octicon-link"></span></a>Day 2 / Night (Tuesday)</h3>
+
+<p>I'm working in the hotel bar tonight as it's the last night of World Cup qualifiers. I'd say this should be very productive!</p>
+
+<p>Well, that wasn't too productive. Spent two hours on the parser, mostly trying to get dates to parse - they won't, they just refuse. So there are no dates in the app now. Tough shit if you wanted dates, you can't have them.</p>
+
+<p>However, journeys now parse correctly and if I can get a table cell formatted tomorrow to show when the trains are due at your station that will constitute a minimum viable product that people can test with. yay!</p>
         </section>
 
         <footer>
-          Darting-around is maintained by <a href="https://github.com/bazscott">bazscott</a><br>
+          DARTing-Around is maintained by <a href="https://github.com/bazscott">bazscott</a><br>
           This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
         </footer>
 
