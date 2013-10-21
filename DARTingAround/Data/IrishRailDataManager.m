@@ -37,12 +37,20 @@
             NSError *initError;
             // TODO: Check the error here
             TBXML *sourceXML = [[TBXML alloc] initWithXMLData:responseObject error:&initError];
-            if (!sourceXML)
+            if (!sourceXML) {
+                [self fetchAllJourneysForStationFailedWithError:nil];
                 return;
+            }
             TBXMLElement *rootElement = sourceXML.rootXMLElement;
-            if (!rootElement)
+            if (!rootElement) {
+                [self fetchAllJourneysForStationFailedWithError:nil];
                 return;
+            }
             TBXMLElement *journeyElement = [TBXML childElementNamed:@"objStationData" parentElement:rootElement];
+            if (!journeyElement) {
+                [self fetchAllJourneysForStationFailedWithError:nil];
+                return;
+            }
             do {
                 NSMutableDictionary *journeyDict = [NSMutableDictionary new];
                 //
@@ -133,11 +141,15 @@
             }
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        LogIt(@"fetchAllJourneysForStation :: AFHTTPRequestOperation Error: %@", error);
-        if ([self.delegate respondsToSelector:@selector(receivedJourneyData:)]) {
-            [self.delegate receivedJourneyData:nil];
-        }
+        [self fetchAllJourneysForStationFailedWithError:error];
     }];
+}
+
+- (void)fetchAllJourneysForStationFailedWithError:(NSError *)error {
+    LogIt(@"fetchAllJourneysForStationFailedWithError :: Error: %@", [[error userInfo] description]);
+    if ([self.delegate respondsToSelector:@selector(receivedJourneyData:)]) {
+        [self.delegate receivedJourneyData:nil];
+    }
 }
 
 - (void)fetchAllStations {
