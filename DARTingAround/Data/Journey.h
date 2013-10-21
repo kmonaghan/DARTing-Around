@@ -32,7 +32,6 @@
 @property (readonly) NSString *journeySchdepart;
 @property (readonly) NSString *journeyExpdepart;
 
-@property (readonly) NSDate *journeyServerTime;
 @property (readonly) NSDate *journeyQueryTime;
 
 - (id)initWithJourneyDictionary:(NSDictionary *)journeyDict;

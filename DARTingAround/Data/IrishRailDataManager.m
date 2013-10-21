@@ -31,11 +31,17 @@
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray *journeysArray = [NSMutableArray array];
         NSString *strData = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        LogIt(@"fetchAllJourneysForStation :: XML (Stringified): %@", strData);
+        LogIt(@"fetchAllJourneysForStation :: responseObject (Stringified): %@", strData);
         //
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            TBXML *sourceXML = [[TBXML alloc] initWithXMLData:responseObject error:nil];
+            NSError *initError;
+            // TODO: Check the error here
+            TBXML *sourceXML = [[TBXML alloc] initWithXMLData:responseObject error:&initError];
+            if (!sourceXML)
+                return;
             TBXMLElement *rootElement = sourceXML.rootXMLElement;
+            if (!rootElement)
+                return;
             TBXMLElement *journeyElement = [TBXML childElementNamed:@"objStationData" parentElement:rootElement];
             do {
                 NSMutableDictionary *journeyDict = [NSMutableDictionary new];
@@ -106,9 +112,9 @@
 //                    [journeyDict setObject:aDate forKey:@"journeyServerTime"];
 //                }
 //                [journeyDict setObject:[TBXML textForElement:serverTimeElement] forKey:@"journeyServerTime"];
-                
 //                TBXMLElement *queryTimeElement = [TBXML childElementNamed:@"Querytime" parentElement:journeyElement];
-//                [journeyDict setObject:[TBXML textForElement:queryTimeElement] forKey:@"journeyQueryTime"];
+                
+                [journeyDict setObject:[NSDate date] forKey:@"journeyQueryTime"];
 
                 Journey *thisJourney = [[Journey alloc] initWithJourneyDictionary:journeyDict];
                 [journeysArray addObject:thisJourney];

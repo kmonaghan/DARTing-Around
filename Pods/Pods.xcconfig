@@ -2,4 +2,3 @@ GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 $(inherited) ARC_ENABLED
 HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/HexColors" "${PODS_ROOT}/Headers/TBXML" "${PODS_ROOT}/Headers/TSMessages"
 OTHER_LDFLAGS = -ObjC -lz -framework CoreGraphics -framework MobileCoreServices -framework Security -framework SystemConfiguration
 PODS_ROOT = ${SRCROOT}/Pods
-#include "../Libs/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework/HockeySDK.framework/Resources/HockeySDK.xcconfig"

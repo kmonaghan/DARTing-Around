@@ -11,5 +11,6 @@
 @interface StationCell : UITableViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *favouriteImage;
 
 @end

@@ -13,6 +13,16 @@
 		65043C7F181061050048FBB1 /* LogoBeta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65043C7B181061050048FBB1 /* LogoBeta@2x.png */; };
 		652981F8180CBFBD00B1305A /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 652981F6180CBFBD00B1305A /* Logo.png */; };
 		652981F9180CBFBD00B1305A /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652981F7180CBFBD00B1305A /* Logo@2x.png */; };
+		652C7E2318147AA100E8460F /* Logo-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E1918147AA100E8460F /* Logo-iPad.png */; };
+		652C7E2418147AA100E8460F /* Logo-iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E1A18147AA100E8460F /* Logo-iPad@2x.png */; };
+		652C7E2518147AA100E8460F /* LogoAlpha-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E1B18147AA100E8460F /* LogoAlpha-iPad.png */; };
+		652C7E2618147AA100E8460F /* LogoAlpha-iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E1C18147AA100E8460F /* LogoAlpha-iPad@2x.png */; };
+		652C7E2718147AA100E8460F /* LogoBeta-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E1D18147AA100E8460F /* LogoBeta-iPad.png */; };
+		652C7E2818147AA100E8460F /* LogoBeta-iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E1E18147AA100E8460F /* LogoBeta-iPad@2x.png */; };
+		652C7E2918147AA100E8460F /* LogoSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E1F18147AA100E8460F /* LogoSettings.png */; };
+		652C7E2A18147AA100E8460F /* LogoSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E2018147AA100E8460F /* LogoSettings@2x.png */; };
+		652C7E2B18147AA100E8460F /* LogoSpotlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E2118147AA100E8460F /* LogoSpotlight.png */; };
+		652C7E2C18147AA100E8460F /* LogoSpotlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E2218147AA100E8460F /* LogoSpotlight@2x.png */; };
 		6535D4AF180C1C7100A78458 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535D4AE180C1C7100A78458 /* Station.m */; };
 		6535D4B0180C1C7100A78458 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535D4AE180C1C7100A78458 /* Station.m */; };
 		6535D4B3180C5EE700A78458 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535D4B2180C5EE700A78458 /* Train.m */; };
@@ -20,6 +30,10 @@
 		6535D4B6180C5FA400A78458 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6535D4B5180C5FA400A78458 /* CoreLocation.framework */; };
 		6535D4B9180C6E8300A78458 /* IrishRailDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535D4B8180C6E8300A78458 /* IrishRailDataManager.m */; };
 		6535D4BA180C6E8300A78458 /* IrishRailDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535D4B8180C6E8300A78458 /* IrishRailDataManager.m */; };
+		65410D571815D39C00A38C98 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65410D551815D39C00A38C98 /* NSDate+NVTimeAgo.m */; };
+		65410D581815D39C00A38C98 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65410D551815D39C00A38C98 /* NSDate+NVTimeAgo.m */; };
+		65410D591815D39C00A38C98 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 65410D561815D39C00A38C98 /* README.md */; };
+		65410D5A1815D39C00A38C98 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 65410D561815D39C00A38C98 /* README.md */; };
 		654618EA180D69B0009CA839 /* Journey.m in Sources */ = {isa = PBXBuildFile; fileRef = 654618E9180D69B0009CA839 /* Journey.m */; };
 		654618EB180D69B0009CA839 /* Journey.m in Sources */ = {isa = PBXBuildFile; fileRef = 654618E9180D69B0009CA839 /* Journey.m */; };
 		657214D21810949300EC7D53 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657214CE1810949300EC7D53 /* HockeySDK.framework */; };
@@ -75,6 +89,16 @@
 		65043C7B181061050048FBB1 /* LogoBeta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoBeta@2x.png"; path = "Assets/LogoBeta@2x.png"; sourceTree = "<group>"; };
 		652981F6180CBFBD00B1305A /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Logo.png; path = Assets/Logo.png; sourceTree = "<group>"; };
 		652981F7180CBFBD00B1305A /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo@2x.png"; path = "Assets/Logo@2x.png"; sourceTree = "<group>"; };
+		652C7E1918147AA100E8460F /* Logo-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-iPad.png"; path = "Assets/Logo-iPad.png"; sourceTree = "<group>"; };
+		652C7E1A18147AA100E8460F /* Logo-iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-iPad@2x.png"; path = "Assets/Logo-iPad@2x.png"; sourceTree = "<group>"; };
+		652C7E1B18147AA100E8460F /* LogoAlpha-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoAlpha-iPad.png"; path = "Assets/LogoAlpha-iPad.png"; sourceTree = "<group>"; };
+		652C7E1C18147AA100E8460F /* LogoAlpha-iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoAlpha-iPad@2x.png"; path = "Assets/LogoAlpha-iPad@2x.png"; sourceTree = "<group>"; };
+		652C7E1D18147AA100E8460F /* LogoBeta-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoBeta-iPad.png"; path = "Assets/LogoBeta-iPad.png"; sourceTree = "<group>"; };
+		652C7E1E18147AA100E8460F /* LogoBeta-iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoBeta-iPad@2x.png"; path = "Assets/LogoBeta-iPad@2x.png"; sourceTree = "<group>"; };
+		652C7E1F18147AA100E8460F /* LogoSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoSettings.png; path = Assets/LogoSettings.png; sourceTree = "<group>"; };
+		652C7E2018147AA100E8460F /* LogoSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoSettings@2x.png"; path = "Assets/LogoSettings@2x.png"; sourceTree = "<group>"; };
+		652C7E2118147AA100E8460F /* LogoSpotlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoSpotlight.png; path = Assets/LogoSpotlight.png; sourceTree = "<group>"; };
+		652C7E2218147AA100E8460F /* LogoSpotlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoSpotlight@2x.png"; path = "Assets/LogoSpotlight@2x.png"; sourceTree = "<group>"; };
 		6535D4AD180C1C7100A78458 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Station.h; path = Data/Station.h; sourceTree = "<group>"; };
 		6535D4AE180C1C7100A78458 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Station.m; path = Data/Station.m; sourceTree = "<group>"; };
 		6535D4B1180C5EE700A78458 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Train.h; path = Data/Train.h; sourceTree = "<group>"; };
@@ -83,6 +107,9 @@
 		6535D4B7180C6E8300A78458 /* IrishRailDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IrishRailDataManager.h; path = Data/IrishRailDataManager.h; sourceTree = "<group>"; };
 		6535D4B8180C6E8300A78458 /* IrishRailDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IrishRailDataManager.m; path = Data/IrishRailDataManager.m; sourceTree = "<group>"; };
 		6535D4D6180C9B4100A78458 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		65410D541815D39C00A38C98 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
+		65410D551815D39C00A38C98 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
+		65410D561815D39C00A38C98 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		654618E7180D1DBD009CA839 /* Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setup.h; sourceTree = "<group>"; };
 		654618E8180D69B0009CA839 /* Journey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Journey.h; path = Data/Journey.h; sourceTree = "<group>"; };
 		654618E9180D69B0009CA839 /* Journey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Journey.m; path = Data/Journey.m; sourceTree = "<group>"; };
@@ -168,6 +195,16 @@
 			isa = PBXGroup;
 			children = (
 				65E1E08F181413870043B3A1 /* Toolbars */,
+				652C7E1918147AA100E8460F /* Logo-iPad.png */,
+				652C7E1A18147AA100E8460F /* Logo-iPad@2x.png */,
+				652C7E1B18147AA100E8460F /* LogoAlpha-iPad.png */,
+				652C7E1C18147AA100E8460F /* LogoAlpha-iPad@2x.png */,
+				652C7E1D18147AA100E8460F /* LogoBeta-iPad.png */,
+				652C7E1E18147AA100E8460F /* LogoBeta-iPad@2x.png */,
+				652C7E1F18147AA100E8460F /* LogoSettings.png */,
+				652C7E2018147AA100E8460F /* LogoSettings@2x.png */,
+				652C7E2118147AA100E8460F /* LogoSpotlight.png */,
+				652C7E2218147AA100E8460F /* LogoSpotlight@2x.png */,
 				65043C78181061050048FBB1 /* LogoAlpha.png */,
 				65043C79181061050048FBB1 /* LogoAlpha@2x.png */,
 				65043C7A181061050048FBB1 /* LogoBeta.png */,
@@ -197,9 +234,20 @@
 			isa = PBXGroup;
 			children = (
 				654618E7180D1DBD009CA839 /* Setup.h */,
+				65410D531815D39C00A38C98 /* NSDate-Time-Ago */,
 				657214CD1810949300EC7D53 /* HockeySDK.embeddedframework */,
 			);
 			path = Libs;
+			sourceTree = "<group>";
+		};
+		65410D531815D39C00A38C98 /* NSDate-Time-Ago */ = {
+			isa = PBXGroup;
+			children = (
+				65410D541815D39C00A38C98 /* NSDate+NVTimeAgo.h */,
+				65410D551815D39C00A38C98 /* NSDate+NVTimeAgo.m */,
+				65410D561815D39C00A38C98 /* README.md */,
+			);
+			path = "NSDate-Time-Ago";
 			sourceTree = "<group>";
 		};
 		657214CD1810949300EC7D53 /* HockeySDK.embeddedframework */ = {
@@ -414,17 +462,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				652C7E2618147AA100E8460F /* LogoAlpha-iPad@2x.png in Resources */,
 				65D3C89C180C17190030908B /* Main_iPad.storyboard in Resources */,
+				652C7E2C18147AA100E8460F /* LogoSpotlight@2x.png in Resources */,
+				652C7E2918147AA100E8460F /* LogoSettings.png in Resources */,
+				652C7E2418147AA100E8460F /* Logo-iPad@2x.png in Resources */,
 				65E1E097181413870043B3A1 /* star_on@2x.png in Resources */,
+				652C7E2B18147AA100E8460F /* LogoSpotlight.png in Resources */,
 				65043C7C181061050048FBB1 /* LogoAlpha.png in Resources */,
+				652C7E2518147AA100E8460F /* LogoAlpha-iPad.png in Resources */,
 				652981F9180CBFBD00B1305A /* Logo@2x.png in Resources */,
+				652C7E2818147AA100E8460F /* LogoBeta-iPad@2x.png in Resources */,
 				657214D31810949300EC7D53 /* HockeySDK.xcconfig in Resources */,
+				652C7E2A18147AA100E8460F /* LogoSettings@2x.png in Resources */,
 				65043C7F181061050048FBB1 /* LogoBeta@2x.png in Resources */,
 				657214D41810949300EC7D53 /* HockeySDKResources.bundle in Resources */,
+				65410D591815D39C00A38C98 /* README.md in Resources */,
 				65E1E095181413870043B3A1 /* star_off@2x.png in Resources */,
 				65E1E094181413870043B3A1 /* star_off.png in Resources */,
 				65043C7E181061050048FBB1 /* LogoBeta.png in Resources */,
 				65D3C8A4180C17190030908B /* Images.xcassets in Resources */,
+				652C7E2718147AA100E8460F /* LogoBeta-iPad.png in Resources */,
+				652C7E2318147AA100E8460F /* Logo-iPad.png in Resources */,
 				65043C7D181061050048FBB1 /* LogoAlpha@2x.png in Resources */,
 				652981F8180CBFBD00B1305A /* Logo.png in Resources */,
 				65D3C899180C17190030908B /* Main_iPhone.storyboard in Resources */,
@@ -437,6 +496,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65410D5A1815D39C00A38C98 /* README.md in Resources */,
 				65D3C8B5180C17190030908B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65E1E08E18117DC70043B3A1 /* AboutViewController.m in Sources */,
+				65410D571815D39C00A38C98 /* NSDate+NVTimeAgo.m in Sources */,
 				654618EA180D69B0009CA839 /* Journey.m in Sources */,
 				6535D4B3180C5EE700A78458 /* Train.m in Sources */,
 				65E1E09F181416640043B3A1 /* JourneyCell.m in Sources */,
@@ -500,6 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6535D4B4180C5EE700A78458 /* Train.m in Sources */,
+				65410D581815D39C00A38C98 /* NSDate+NVTimeAgo.m in Sources */,
 				6535D4BA180C6E8300A78458 /* IrishRailDataManager.m in Sources */,
 				654618EB180D69B0009CA839 /* Journey.m in Sources */,
 				6535D4B0180C1C7100A78458 /* Station.m in Sources */,
@@ -617,6 +679,21 @@
 				);
 				INFOPLIST_FILE = "DARTingAround/DARTingAround-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					CoreText,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					Foundation,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					UIKit,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -749,6 +826,21 @@
 					"\"${PODS_ROOT}/Headers/AFNetworking\"",
 				);
 				INFOPLIST_FILE = "DARTingAround/DARTingAround-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					CoreText,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					Foundation,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					UIKit,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -778,6 +870,21 @@
 					"\"${PODS_ROOT}/Headers/AFNetworking\"",
 				);
 				INFOPLIST_FILE = "DARTingAround/DARTingAround-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					CoreText,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					Foundation,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					SystemConfiguration,
+					"-framework",
+					UIKit,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";

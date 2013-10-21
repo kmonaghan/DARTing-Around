@@ -15,6 +15,7 @@
 @property (nonatomic, retain) IrishRailDataManager *railDataManager;
 @property (nonatomic, strong) Station *detailStation;
 
+@property (strong, nonatomic) IBOutlet UIView *directionView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *directionSegmentedController;
 
 - (IBAction)directionSegmentWasPicked:(id)sender;

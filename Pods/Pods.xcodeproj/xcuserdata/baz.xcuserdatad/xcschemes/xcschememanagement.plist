@@ -8,61 +8,51 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-HexColors.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-TBXML.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Pods-TSMessages.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4149FEB936A04E4B85CCE36D</key>
+		<key>039C7C7658EE486CAED81D25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>503A086C6DBE49AE85CFE9AA</key>
+		<key>6EE708651E29475381D953F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B06A4151A06741F5AC207FBA</key>
+		<key>71C36361430F426F86CF1CFB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BCCCB5F3844A4C73AA14D5BD</key>
+		<key>8CA68CFF122D4E658F6520C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F52A4DE6992E4E4D9170912A</key>
+		<key>B314D52CBADB4C9FBCD98FCA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

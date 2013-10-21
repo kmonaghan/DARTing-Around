@@ -11,10 +11,13 @@
 #import "Journey.h"
 #import "JourneyCell.h"
 #import <TSMessages/TSMessage.h>
+#import "NSDate+NVTimeAgo.h"
 
 @interface DetailViewController () <IrishRailDataManagerDelegate> {
     NSMutableArray *_objects;
     NSMutableArray *_originalObjectsArray;
+    NSString *_formattedQueryDate;
+    NSTimer *_queryHowLongAgoTimer;
 }
 
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -30,6 +33,45 @@
     LogIt(@"fetchDataFromServer");
     [self.directionSegmentedController setSelectedSegmentIndex:1];
     [self.railDataManager fetchAllJourneysForStation:self.detailStation.stationCode];
+}
+
+- (void)toggleFavourite {
+    LogIt(@"toggleFavourite");
+    NSArray *favouriteStationsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"FavouriteStations"];
+    NSMutableArray *newFavouriteStationsArray = [[NSMutableArray alloc] initWithCapacity:[favouriteStationsArray count]];
+    newFavouriteStationsArray = [NSMutableArray arrayWithArray:favouriteStationsArray];
+    if ([favouriteStationsArray containsObject:self.detailStation.stationCode]) {
+        // Removing this station from favourites
+        [newFavouriteStationsArray removeObject:self.detailStation.stationCode];
+    }
+    else {
+        // Adding this station to favourites
+        [newFavouriteStationsArray addObject:self.detailStation.stationCode];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:newFavouriteStationsArray forKey:@"FavouriteStations"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    LogIt(@"toggleFavourite :: newFavouriteStationsArray: %@", newFavouriteStationsArray);
+    [self configureFavouriteButton];
+}
+
+- (void)configureFavouriteButton {
+    LogIt(@"configureFavouriteButton");
+    UIImage *favButtonImage;
+    NSArray *favouriteStationsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"FavouriteStations"];
+    if ([favouriteStationsArray containsObject:self.detailStation.stationCode]) {
+        favButtonImage = [UIImage imageNamed:@"star_on.png"];
+    }
+    else {
+        favButtonImage = [UIImage imageNamed:@"star_off.png"];
+    }
+    favButtonImage = [favButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIBarButtonItem *favButton = [[UIBarButtonItem alloc]
+                                  initWithImage:favButtonImage
+                                  style:UIBarButtonItemStylePlain
+                                  target:self
+                                  action:@selector(toggleFavourite)];
+//    [[[self navigationItem] rightBarButtonItem] setTintColor:UIColorFromRGB(COLOUR_LIGHT_GREEN)];
+    self.navigationItem.rightBarButtonItem = favButton;
 }
 
 #pragma mark - Managing the detail item
@@ -48,25 +90,22 @@
     }        
 }
 
+- (void)refreshTriggered {
+    LogIt(@"refreshTriggered");
+    if (self.detailStation) {
+        [self fetchDataFromServer];
+    }
+    else {
+        [self.refreshControl endRefreshing];
+    }
+}
+
 - (void)configureView
 {
     LogIt(@"configureView");
     if (self.detailStation) {
         self.navigationItem.title = self.detailStation.stationDesc;
     }
-}
-
-- (void)viewDidLoad
-{
-    LogIt(@"viewDidLoad");
-    [super viewDidLoad];
-	//
-    self.railDataManager = [IrishRailDataManager new];
-    self.railDataManager.delegate = self;
-    //
-    [self configureView];
-    //
-    [self setupRefreshControl];
 }
 
 - (void)setupRefreshControl {
@@ -77,18 +116,43 @@
     [self setRefreshControl:refreshControl];
 }
 
-- (void)refreshTriggered {
-    LogIt(@"refreshTriggered");
-    [_objects removeAllObjects];
-    [self fetchDataFromServer];
+- (void)viewDidLoad
+{
+    LogIt(@"viewDidLoad");
+    [super viewDidLoad];
+	//
+    self.railDataManager = [IrishRailDataManager new];
+    self.railDataManager.delegate = self;
+    //
+    self.directionView.alpha = 0.0;
+    [self.directionView removeFromSuperview];
+    [self configureView];
+    //
+    [self setupRefreshControl];
+    //
+    _queryHowLongAgoTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                             target:self
+                                                           selector:@selector(displayQueryTime)
+                                                           userInfo:nil
+                                                            repeats:YES];
+}
+
+- (void)dealloc {
+    LogIt(@"dealloc");
+    [_queryHowLongAgoTimer invalidate];
+    _queryHowLongAgoTimer = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     LogIt(@"viewDidAppear");
-    if ([_objects count] == 0) {
+    [super viewDidAppear:animated];
+    if (([_objects count] == 0) && (self.detailStation)) {
+        [self refreshTriggered];
+        self.directionView.hidden = 0.0;
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
         [self.refreshControl beginRefreshing];
-        [self fetchDataFromServer];
     }
+    [self configureFavouriteButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,7 +189,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    LogIt(@"tableView numberOfRowsInSection");
+    LogIt(@"tableView numberOfRowsInSection : %lu", (unsigned long)_objects.count);
     return _objects.count;
 }
 
@@ -180,17 +244,21 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     LogIt(@"prepareForSegue");
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Station *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailStation:object];
-    }
+//    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        Station *object = _objects[indexPath.row];
+//        [[segue destinationViewController] setDetailStation:object];
+//    }
 }
 
 - (void)updateTable
 {
     LogIt(@"updateTable");
     [self.refreshControl endRefreshing];
+    [UIView animateWithDuration:1.0 animations:^{
+        [self.view addSubview:self.directionView];
+        self.directionView.alpha = 1.0;
+    }];
     [self.tableView reloadData];
 }
 
@@ -224,25 +292,44 @@
 
 - (void)receivedJourneyData:(NSArray *)journeysArray {
     LogIt(@"receivedJourneyData");
-    _objects = [NSMutableArray arrayWithArray:journeysArray];
-    _originalObjectsArray = _objects;
-    if ([_objects count] > 0) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self updateTable];
-        });
-        //        [self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:NO];
+    if ([journeysArray count] > 0) {
+        [_objects removeAllObjects];
+        _objects = [NSMutableArray arrayWithArray:journeysArray];
+        _originalObjectsArray = _objects;
+        if ([_objects count] > 0) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self updateTable];
+            });
+        }
+        [self displayQueryTime];
     }
     else {
-        [TSMessage showNotificationInViewController:self.navigationController
-                                              title:@"Nothing found"
-                                           subtitle:@"I couldn't find any trains, sorry. Please try again."
-                                               type:TSMessageNotificationTypeError
-                                           duration:3.0
-                                           callback:^{}
-                                        buttonTitle:nil
-                                     buttonCallback:^{}
-                                         atPosition:TSMessageNotificationPositionTop
-                                canBeDismisedByUser:YES];
+        [self performSelectorOnMainThread:@selector(showNothingFoundError) withObject:nil waitUntilDone:NO];
+    }
+}
+
+- (void)showNothingFoundError {
+    LogIt(@"showNothingFoundError");
+    [TSMessage showNotificationInViewController:self.navigationController
+                                          title:@"Nothing found"
+                                       subtitle:@"I couldn't find any trains, sorry. Please try again."
+                                           type:TSMessageNotificationTypeError
+                                       duration:3.0
+                                       callback:^{}
+                                    buttonTitle:nil
+                                 buttonCallback:^{}
+                                     atPosition:TSMessageNotificationPositionTop
+                            canBeDismisedByUser:YES];
+    [self updateTable];
+}
+
+- (void)displayQueryTime {
+    LogIt(@"displayQueryTime");
+    if ([_objects count] > 0) {
+        Journey *aJourney = [_objects objectAtIndex:0];
+        _formattedQueryDate = [aJourney.journeyQueryTime formattedAsTimeAgo];
+        NSString *refreshTitle = [NSString stringWithFormat:@"Updated %@", _formattedQueryDate];
+        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:refreshTitle];
     }
 }
 

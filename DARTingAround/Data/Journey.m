@@ -38,7 +38,6 @@
         _journeyExparrival = journeyDict[@"journeyExparrival"];
         _journeySchdepart = journeyDict[@"journeySchdepart"];
         _journeyExpdepart = journeyDict[@"journeyExpdepart"];
-        _journeyServerTime = journeyDict[@"journeyServerTime"];
         _journeyQueryTime = journeyDict[@"journeyQueryTime"];
     }
     return self;

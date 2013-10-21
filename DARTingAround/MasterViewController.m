@@ -14,7 +14,9 @@
 #import <TSMessages/TSMessage.h>
 
 @interface MasterViewController () <IrishRailDataManagerDelegate> {
+    NSMutableArray *_displayObjects;
     NSMutableArray *_objects;
+    NSArray *_favouriteStationsArray;
 }
 @end
 
@@ -63,6 +65,7 @@
 - (void)refreshTriggered {
     LogIt(@"refreshTriggered");
     [_objects removeAllObjects];
+    [_displayObjects removeAllObjects];
     [self fetchDataFromServer];
 }
 
@@ -74,6 +77,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     LogIt(@"viewDidAppear");
     if ([_objects count] == 0) {
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
         [self.refreshControl beginRefreshing];
         [self fetchDataFromServer];
     }
@@ -92,20 +96,25 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    LogIt(@"tableView numberOfRowsInSection :: %lu", (unsigned long)_objects.count);
-    return _objects.count;
+    LogIt(@"tableView numberOfRowsInSection :: %lu", (unsigned long)_displayObjects.count);
+    return _displayObjects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LogIt(@"tableView cellForRowAtIndexPath");
     StationCell *cell = (StationCell *)[tableView dequeueReusableCellWithIdentifier:@"StationCell" forIndexPath:indexPath];
 
-    Station *aStation = _objects[indexPath.row];
-    
-//    UILabel *stationLabel = (UILabel *)[cell viewWithTag:100];
-//	stationLabel.text = aStation.stationDesc;
-    
+    Station *aStation = _displayObjects[indexPath.row];
     cell.nameLabel.text = aStation.stationDesc;
+    UIImage *favImage = [UIImage imageNamed:@"star_on.png"];
+    favImage = [favImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    if ([_favouriteStationsArray containsObject:aStation.stationCode]) {
+        // This is a favourite
+        cell.favouriteImage.image = favImage;
+    }
+    else {
+        cell.favouriteImage.image = nil;
+    }
     
     return cell;
 }
@@ -117,7 +126,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     LogIt(@"tableView didSelectRowAtIndexPath");
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        Station *object = _objects[indexPath.row];
+        Station *object = _displayObjects[indexPath.row];
         self.detailViewController.detailStation = object;
     }
 }
@@ -126,7 +135,7 @@
     LogIt(@"prepareForSegue");
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Station *object = _objects[indexPath.row];
+        Station *object = _displayObjects[indexPath.row];
         [[segue destinationViewController] setDetailStation:object];
         // Hide the text on the back button
         self.title = @"";
@@ -145,6 +154,14 @@
     LogIt(@"receivedStationData");
     _objects = [NSMutableArray arrayWithArray:stationsArray];
     if ([_objects count] > 0) {
+        // Process these objects in to a new array with favourites at the top
+        _displayObjects = [NSMutableArray arrayWithArray:_objects];
+        _favouriteStationsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"FavouriteStations"];
+        for (Station *aStation in _objects) {
+            if ([_favouriteStationsArray containsObject:aStation.stationCode]) {
+                [_displayObjects insertObject:aStation atIndex:0];
+            }
+        }
         [self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:NO];
     }
     else {
