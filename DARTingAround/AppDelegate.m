@@ -11,8 +11,7 @@
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <TSMessages/TSMessage.h>
 
-@interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate>
-
+@interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate>
 @end
 
 @implementation AppDelegate
@@ -81,6 +80,7 @@
 }
 
 #pragma mark - BITUpdateManagerDelegate
+
 - (NSString *)customDeviceIdentifierForUpdateManager:(BITUpdateManager *)updateManager {
     LogIt(@"customDeviceIdentifierForUpdateManager");
 #ifndef CONFIGURATION_Release
@@ -94,12 +94,13 @@
 
 - (void)configureReachability {
     LogIt(@"configureReachability");
-    AFNetworkReachabilityManager *reachability = [AFNetworkReachabilityManager managerForDomain:@"http://api.irishrail.ie"];
+//    AFNetworkReachabilityManager *reachability = [AFNetworkReachabilityManager managerForDomain:@"http://api.irishrail.ie/realtime/"];
+    AFNetworkReachabilityManager *reachability = [AFNetworkReachabilityManager sharedManager];
     [reachability setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         switch (status) {
             case AFNetworkReachabilityStatusNotReachable:
                 LogIt(@"configureReachability :: No Internet Connection");
-                [TSMessage showNotificationInViewController:self.window.rootViewController.navigationController
+                [TSMessage showNotificationInViewController:self.window.rootViewController
                                                       title:@"No internet connection"
                                                    subtitle:@"I couldn't connect to the train data service. Either it is offline or you are not connected to the internet."
                                                        type:TSMessageNotificationTypeError

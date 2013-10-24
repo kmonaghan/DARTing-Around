@@ -18,6 +18,11 @@
 @property (strong, nonatomic) IBOutlet UIView *directionView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *directionSegmentedController;
 
+@property (strong, nonatomic) IBOutlet UIView *stopwatchView;
+@property (strong, nonatomic) IBOutlet UITextField *stopwatchTime;
+@property (strong, nonatomic) IBOutlet UIButton *stopwatchGoButton;
+
 - (IBAction)directionSegmentWasPicked:(id)sender;
+- (IBAction)tapStopwatchGoButton:(id)sender;
 
 @end

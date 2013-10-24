@@ -203,8 +203,20 @@
         //
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             TBXML *sourceXML = [[TBXML alloc] initWithXMLData:responseObject error:nil];
+            if (!sourceXML) {
+                [self fetchStationsFailedWithError:nil];
+                return;
+            }
             TBXMLElement *rootElement = sourceXML.rootXMLElement;
+            if (!rootElement) {
+                [self fetchStationsFailedWithError:nil];
+                return;
+            }
             TBXMLElement *stationElement = [TBXML childElementNamed:@"objStation" parentElement:rootElement];
+            if (!stationElement) {
+                [self fetchStationsFailedWithError:nil];
+                return;
+            }
             do {
                 TBXMLElement *descElement = [TBXML childElementNamed:@"StationDesc" parentElement:stationElement];
                 NSString *stationDesc = [TBXML textForElement:descElement];
@@ -252,10 +264,15 @@
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         LogIt(@"fetchAllStationsFromServer :: AFHTTPRequestOperation Error: %@", error);
-        if ([self.delegate respondsToSelector:@selector(receivedStationData:)]) {
-            [self.delegate receivedStationData:nil];
-        }
+        [self fetchStationsFailedWithError:error];
     }];
+}
+
+- (void)fetchStationsFailedWithError:(NSError *)error {
+    LogIt(@"fetchStationsFailedWithError :: Error: %@", [[error userInfo] description]);
+    if ([self.delegate respondsToSelector:@selector(receivedStationData:)]) {
+        [self.delegate receivedStationData:nil];
+    }
 }
 
 #pragma mark - Management Methods

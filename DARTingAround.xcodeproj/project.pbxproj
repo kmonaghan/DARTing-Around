@@ -67,6 +67,14 @@
 		65E1E09C181413DA0043B3A1 /* StationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E1E09A181413DA0043B3A1 /* StationCell.m */; };
 		65E1E09F181416640043B3A1 /* JourneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E1E09E181416640043B3A1 /* JourneyCell.m */; };
 		65E1E0A0181416640043B3A1 /* JourneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E1E09E181416640043B3A1 /* JourneyCell.m */; };
+		65E8C27F18186F15002F86B5 /* stopwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C27D18186F15002F86B5 /* stopwatch.png */; };
+		65E8C28018186F15002F86B5 /* stopwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C27D18186F15002F86B5 /* stopwatch.png */; };
+		65E8C28118186F15002F86B5 /* stopwatch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C27E18186F15002F86B5 /* stopwatch@2x.png */; };
+		65E8C28218186F15002F86B5 /* stopwatch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C27E18186F15002F86B5 /* stopwatch@2x.png */; };
+		65E8C28518188935002F86B5 /* stopwatch_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C28318188935002F86B5 /* stopwatch_on.png */; };
+		65E8C28618188935002F86B5 /* stopwatch_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C28318188935002F86B5 /* stopwatch_on.png */; };
+		65E8C28718188935002F86B5 /* stopwatch_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C28418188935002F86B5 /* stopwatch_on@2x.png */; };
+		65E8C28818188935002F86B5 /* stopwatch_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C28418188935002F86B5 /* stopwatch_on@2x.png */; };
 		E4EAF12DC6654088B84B59A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C31E9AAF7D54305987EF2C1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -110,7 +118,6 @@
 		65410D541815D39C00A38C98 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		65410D551815D39C00A38C98 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
 		65410D561815D39C00A38C98 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		654618E7180D1DBD009CA839 /* Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setup.h; sourceTree = "<group>"; };
 		654618E8180D69B0009CA839 /* Journey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Journey.h; path = Data/Journey.h; sourceTree = "<group>"; };
 		654618E9180D69B0009CA839 /* Journey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Journey.m; path = Data/Journey.m; sourceTree = "<group>"; };
 		657214CE1810949300EC7D53 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
@@ -151,6 +158,11 @@
 		65E1E09A181413DA0043B3A1 /* StationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationCell.m; path = Interface/StationCell.m; sourceTree = "<group>"; };
 		65E1E09D181416640043B3A1 /* JourneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JourneyCell.h; path = Interface/JourneyCell.h; sourceTree = "<group>"; };
 		65E1E09E181416640043B3A1 /* JourneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JourneyCell.m; path = Interface/JourneyCell.m; sourceTree = "<group>"; };
+		65E8C27C18186064002F86B5 /* Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setup.h; sourceTree = "<group>"; };
+		65E8C27D18186F15002F86B5 /* stopwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopwatch.png; sourceTree = "<group>"; };
+		65E8C27E18186F15002F86B5 /* stopwatch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopwatch@2x.png"; sourceTree = "<group>"; };
+		65E8C28318188935002F86B5 /* stopwatch_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopwatch_on.png; sourceTree = "<group>"; };
+		65E8C28418188935002F86B5 /* stopwatch_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopwatch_on@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +245,7 @@
 		6535D4BB180C995100A78458 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				654618E7180D1DBD009CA839 /* Setup.h */,
+				65E8C27C18186064002F86B5 /* Setup.h */,
 				65410D531815D39C00A38C98 /* NSDate-Time-Ago */,
 				657214CD1810949300EC7D53 /* HockeySDK.embeddedframework */,
 			);
@@ -353,6 +365,10 @@
 		65E1E08F181413870043B3A1 /* Toolbars */ = {
 			isa = PBXGroup;
 			children = (
+				65E8C28318188935002F86B5 /* stopwatch_on.png */,
+				65E8C28418188935002F86B5 /* stopwatch_on@2x.png */,
+				65E8C27D18186F15002F86B5 /* stopwatch.png */,
+				65E8C27E18186F15002F86B5 /* stopwatch@2x.png */,
 				65E1E090181413870043B3A1 /* star_off.png */,
 				65E1E091181413870043B3A1 /* star_off@2x.png */,
 				65E1E092181413870043B3A1 /* star_on.png */,
@@ -462,6 +478,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65E8C28518188935002F86B5 /* stopwatch_on.png in Resources */,
 				652C7E2618147AA100E8460F /* LogoAlpha-iPad@2x.png in Resources */,
 				65D3C89C180C17190030908B /* Main_iPad.storyboard in Resources */,
 				652C7E2C18147AA100E8460F /* LogoSpotlight@2x.png in Resources */,
@@ -475,6 +492,8 @@
 				652C7E2818147AA100E8460F /* LogoBeta-iPad@2x.png in Resources */,
 				657214D31810949300EC7D53 /* HockeySDK.xcconfig in Resources */,
 				652C7E2A18147AA100E8460F /* LogoSettings@2x.png in Resources */,
+				65E8C28718188935002F86B5 /* stopwatch_on@2x.png in Resources */,
+				65E8C27F18186F15002F86B5 /* stopwatch.png in Resources */,
 				65043C7F181061050048FBB1 /* LogoBeta@2x.png in Resources */,
 				657214D41810949300EC7D53 /* HockeySDKResources.bundle in Resources */,
 				65410D591815D39C00A38C98 /* README.md in Resources */,
@@ -483,6 +502,7 @@
 				65043C7E181061050048FBB1 /* LogoBeta.png in Resources */,
 				65D3C8A4180C17190030908B /* Images.xcassets in Resources */,
 				652C7E2718147AA100E8460F /* LogoBeta-iPad.png in Resources */,
+				65E8C28118186F15002F86B5 /* stopwatch@2x.png in Resources */,
 				652C7E2318147AA100E8460F /* Logo-iPad.png in Resources */,
 				65043C7D181061050048FBB1 /* LogoAlpha@2x.png in Resources */,
 				652981F8180CBFBD00B1305A /* Logo.png in Resources */,
@@ -496,8 +516,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65E8C28618188935002F86B5 /* stopwatch_on.png in Resources */,
 				65410D5A1815D39C00A38C98 /* README.md in Resources */,
 				65D3C8B5180C17190030908B /* InfoPlist.strings in Resources */,
+				65E8C28218186F15002F86B5 /* stopwatch@2x.png in Resources */,
+				65E8C28018186F15002F86B5 /* stopwatch.png in Resources */,
+				65E8C28818188935002F86B5 /* stopwatch_on@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

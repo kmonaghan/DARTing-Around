@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DARTingAround/DetailViewController.m"
-            timestampString = "404084541.534272"
+            timestampString = "404262524.080138"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
             landmarkName = "-directionSegmentWasPicked:"
             landmarkType = "5">
             <Locations>
@@ -72,28 +72,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DARTingAround/Data/IrishRailDataManager.m"
-            timestampString = "404089991.423001"
+            timestampString = "404252733.242933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
             endingLineNumber = "49"
             landmarkName = "-fetchAllJourneysForStation:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DARTingAround/Data/IrishRailDataManager.m"
-            timestampString = "404089991.423001"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "-fetchAllJourneysForStationFailedWithError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

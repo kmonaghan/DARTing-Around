@@ -13,7 +13,7 @@
 #import <TSMessages/TSMessage.h>
 #import "NSDate+NVTimeAgo.h"
 
-@interface DetailViewController () <IrishRailDataManagerDelegate> {
+@interface DetailViewController () <IrishRailDataManagerDelegate, UITextFieldDelegate> {
     NSMutableArray *_objects;
     NSMutableArray *_originalObjectsArray;
     NSString *_formattedQueryDate;
@@ -21,6 +21,7 @@
 }
 
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
+@property (strong, nonatomic) UIToolbar *fieldAccessoryView;
 
 - (void)configureView;
 
@@ -51,11 +52,12 @@
     [[NSUserDefaults standardUserDefaults] setObject:newFavouriteStationsArray forKey:@"FavouriteStations"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     LogIt(@"toggleFavourite :: newFavouriteStationsArray: %@", newFavouriteStationsArray);
-    [self configureFavouriteButton];
+    [self configureNavigationBarButtons];
 }
 
-- (void)configureFavouriteButton {
-    LogIt(@"configureFavouriteButton");
+- (void)configureNavigationBarButtons {
+    LogIt(@"configureNavigationBarButtons");
+    // Favourite station
     UIImage *favButtonImage;
     NSArray *favouriteStationsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"FavouriteStations"];
     if ([favouriteStationsArray containsObject:self.detailStation.stationCode]) {
@@ -70,8 +72,25 @@
                                   style:UIBarButtonItemStylePlain
                                   target:self
                                   action:@selector(toggleFavourite)];
-//    [[[self navigationItem] rightBarButtonItem] setTintColor:UIColorFromRGB(COLOUR_LIGHT_GREEN)];
-    self.navigationItem.rightBarButtonItem = favButton;
+    // Stopwatch
+    UIImage *stopwatchButtonImage;
+    NSString *walkToStationTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTime"];
+    NSInteger walkToStationTimeInteger = [walkToStationTime integerValue];
+    if (walkToStationTimeInteger > 0) {
+        stopwatchButtonImage = [UIImage imageNamed:@"stopwatch_on.png"];
+    }
+    else {
+        stopwatchButtonImage = [UIImage imageNamed:@"stopwatch.png"];
+    }
+    stopwatchButtonImage = [stopwatchButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIBarButtonItem *stopwatchButton = [[UIBarButtonItem alloc]
+                                        initWithImage:stopwatchButtonImage
+                                        style:UIBarButtonItemStylePlain
+                                        target:self
+                                        action:@selector(stopwatchAction)];
+    // Add the buttons
+    NSArray *navButtons = @[favButton, stopwatchButton];
+    self.navigationItem.rightBarButtonItems = navButtons;
 }
 
 #pragma mark - Managing the detail item
@@ -92,6 +111,10 @@
 
 - (void)refreshTriggered {
     LogIt(@"refreshTriggered");
+    [self.stopwatchView removeFromSuperview];
+    [self configureNavigationBarButtons];
+    [self.tableView setContentOffset:CGPointMake(0.0, -64.0)];
+    //
     if (self.detailStation) {
         [self fetchDataFromServer];
     }
@@ -130,6 +153,10 @@
     //
     [self setupRefreshControl];
     //
+    [self.stopwatchView removeFromSuperview];
+    [self createAccessoryView];
+    [self.stopwatchTime setInputAccessoryView:self.fieldAccessoryView];
+    //
     _queryHowLongAgoTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                              target:self
                                                            selector:@selector(displayQueryTime)
@@ -152,7 +179,7 @@
         self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
         [self.refreshControl beginRefreshing];
     }
-    [self configureFavouriteButton];
+    [self configureNavigationBarButtons];
 }
 
 - (void)didReceiveMemoryWarning
@@ -212,6 +239,18 @@
         // You can get on this train
         cell.destinationLabel.text = aJourney.journeyDestination;
         cell.departTimeLabel.text = aJourney.journeyExpdepart;
+        // Will I make it to the station in time?
+        NSString *walkToStationTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTime"];
+        NSInteger walkToStationTimeInteger = [walkToStationTime integerValue];
+        NSInteger departsInInteger = [aJourney.journeyDueIn integerValue];
+        if (departsInInteger >= walkToStationTimeInteger) {
+            // Yay, I can make it
+            cell.destinationLabel.textColor = UIColorFromRGB(COLOUR_DARK_BLUE);
+        }
+        else {
+            // Can't get there in time
+            cell.destinationLabel.textColor = UIColorFromRGB(COLOUR_LIGHT_GREY);
+        }
     }
     
     if ([aJourney.journeyLate integerValue] > 0) {
@@ -324,13 +363,71 @@
 }
 
 - (void)displayQueryTime {
-    LogIt(@"displayQueryTime");
     if ([_objects count] > 0) {
         Journey *aJourney = [_objects objectAtIndex:0];
         _formattedQueryDate = [aJourney.journeyQueryTime formattedAsTimeAgo];
         NSString *refreshTitle = [NSString stringWithFormat:@"Updated %@", _formattedQueryDate];
         self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:refreshTitle];
     }
+}
+
+#pragma mark - UITextField and stopwatch methods
+
+- (void)stopwatchAction {
+    LogIt(@"stopwatchAction");
+    [self.view addSubview:self.stopwatchView];
+    [self.tableView setContentOffset:CGPointMake(self.stopwatchView.frame.origin.x, self.stopwatchView.frame.origin.y)];
+    self.stopwatchTime.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTime"];
+    [self.stopwatchTime becomeFirstResponder];
+}
+
+- (void)createAccessoryView {
+	LogIt(@"createAccessoryView");
+	CGRect frame = CGRectMake(0.0, self.view.bounds.size.height, self.view.bounds.size.width, 44.0);
+	self.fieldAccessoryView = [[UIToolbar alloc] initWithFrame:frame];
+	self.fieldAccessoryView.tag = 200;
+	//
+	self.fieldAccessoryView.barStyle = UIBarStyleDefault;
+	//
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+																				target:self
+																				action:@selector(tapStopwatchCancelButton)];
+	UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																				 target:nil
+																				 action:nil];
+    UIBarButtonItem *findButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+																				target:self
+																				action:@selector(tapStopwatchGoButton:)];
+	//
+	[self.fieldAccessoryView setItems:[NSArray arrayWithObjects:doneButton, spaceButton, findButton, nil] animated:NO];
+}
+
+- (IBAction)tapStopwatchGoButton:(id)sender {
+    LogIt(@"tapStopwatchGoButton");
+    [self.stopwatchTime resignFirstResponder];
+    // Save the time specified to defaults
+    [[NSUserDefaults standardUserDefaults] setValue:self.stopwatchTime.text forKey:@"WalkToStationTime"];
+    [self refreshTriggered];
+}
+
+- (void)tapStopwatchCancelButton {
+    LogIt(@"tapStopwatchCancelButton");
+    [self.stopwatchTime resignFirstResponder];
+    // Save the time specified to defaults
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"WalkToStationTime"];
+    [self refreshTriggered];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    LogIt(@"textFieldShouldReturn");
+	[self.stopwatchTime resignFirstResponder];
+	return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    LogIt(@"touchesBegan");
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
 }
 
 @end
