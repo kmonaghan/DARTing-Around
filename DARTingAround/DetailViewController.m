@@ -18,6 +18,7 @@
     NSMutableArray *_originalObjectsArray;
     NSString *_formattedQueryDate;
     NSTimer *_queryHowLongAgoTimer;
+    NSNumber *_currentStopwatchTimer;
 }
 
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -73,24 +74,42 @@
                                   target:self
                                   action:@selector(toggleFavourite)];
     // Stopwatch
-    UIImage *stopwatchButtonImage;
-    NSString *walkToStationTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTime"];
-    NSInteger walkToStationTimeInteger = [walkToStationTime integerValue];
-    if (walkToStationTimeInteger > 0) {
-        stopwatchButtonImage = [UIImage imageNamed:@"stopwatch_on.png"];
+    UIImage *stopwatchImage;
+    if ([_currentStopwatchTimer floatValue] > 0.0f) {
+        stopwatchImage = [UIImage imageNamed:@"stopwatch_on.png"];
     }
     else {
-        stopwatchButtonImage = [UIImage imageNamed:@"stopwatch.png"];
+        stopwatchImage = [UIImage imageNamed:@"stopwatch.png"];
     }
-    stopwatchButtonImage = [stopwatchButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    UIBarButtonItem *stopwatchButton = [[UIBarButtonItem alloc]
-                                        initWithImage:stopwatchButtonImage
-                                        style:UIBarButtonItemStylePlain
-                                        target:self
-                                        action:@selector(stopwatchAction)];
+    stopwatchImage = [stopwatchImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    // Create a custom view nav button with stopwatch image and time in it
+    UIButton *stopwatchImageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [stopwatchImageButton setBackgroundImage:stopwatchImage forState:UIControlStateNormal];
+    [stopwatchImageButton addTarget:self action:@selector(stopwatchAction) forControlEvents:UIControlEventTouchUpInside];
+    [stopwatchImageButton setFrame:CGRectMake(6.0, 6.0, 25.0, 25.0)];
+
+    UIView *buttView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 37.0, 37.0)];
+    [buttView addSubview:stopwatchImageButton];
+    
+    UILabel *timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.0, 17.0, 20.0, 20.0)];
+    [timerLabel setFont:[UIFont boldSystemFontOfSize:9.0]];
+    [timerLabel setBackgroundColor:[UIColor clearColor]];
+    [timerLabel setTextColor:UIColorFromRGB(COLOUR_DARK_BLUE)];
+    [timerLabel setTextAlignment:NSTextAlignmentRight];
+    if ([_currentStopwatchTimer floatValue] > 0.0f) {
+        timerLabel.text = [NSString stringWithFormat:@"%d", [_currentStopwatchTimer integerValue]];
+    } else {
+        timerLabel.text = @"";
+    }
+    [buttView addSubview:timerLabel];
+    
+    UIBarButtonItem *stopwatchButton = [[UIBarButtonItem alloc] initWithCustomView:buttView];
+
     // Add the buttons
-    NSArray *navButtons = @[favButton, stopwatchButton];
-    self.navigationItem.rightBarButtonItems = navButtons;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *navButtons = @[favButton, stopwatchButton];
+        self.navigationItem.rightBarButtonItems = navButtons;
+    });
 }
 
 #pragma mark - Managing the detail item
@@ -157,7 +176,7 @@
     [self createAccessoryView];
     [self.stopwatchTime setInputAccessoryView:self.fieldAccessoryView];
     //
-    _queryHowLongAgoTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+    _queryHowLongAgoTimer = [NSTimer scheduledTimerWithTimeInterval:30.0
                                                              target:self
                                                            selector:@selector(displayQueryTime)
                                                            userInfo:nil
@@ -173,13 +192,16 @@
 - (void)viewDidAppear:(BOOL)animated {
     LogIt(@"viewDidAppear");
     [super viewDidAppear:animated];
+    NSString *walkToStationTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTime"];
+    _currentStopwatchTimer = @([walkToStationTime floatValue]);
+//    [self updateStopwatchTime];
+    [self configureNavigationBarButtons];
     if (([_objects count] == 0) && (self.detailStation)) {
         [self refreshTriggered];
         self.directionView.hidden = 0.0;
         self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
         [self.refreshControl beginRefreshing];
     }
-    [self configureNavigationBarButtons];
 }
 
 - (void)didReceiveMemoryWarning
@@ -234,31 +256,34 @@
         // Terminates here
         cell.destinationLabel.text = @"Terminates here";
         cell.departTimeLabel.text = @"";
+        cell.dueInLabel.textColor = UIColorFromRGB(COLOUR_RED);
     }
     else {
         // You can get on this train
         cell.destinationLabel.text = aJourney.journeyDestination;
         cell.departTimeLabel.text = aJourney.journeyExpdepart;
         // Will I make it to the station in time?
-        NSString *walkToStationTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTime"];
-        NSInteger walkToStationTimeInteger = [walkToStationTime integerValue];
         NSInteger departsInInteger = [aJourney.journeyDueIn integerValue];
-        if (departsInInteger >= walkToStationTimeInteger) {
+        if (departsInInteger >= [_currentStopwatchTimer integerValue]) {
             // Yay, I can make it
-            cell.destinationLabel.textColor = UIColorFromRGB(COLOUR_DARK_BLUE);
+            cell.dueInLabel.textColor = UIColorFromRGB(COLOUR_GREEN);
         }
         else {
-            // Can't get there in time
-            cell.destinationLabel.textColor = UIColorFromRGB(COLOUR_LIGHT_GREY);
+            // Can't get there in time, will it be close?
+            if ((departsInInteger + 1) >= [_currentStopwatchTimer integerValue]) {
+                cell.dueInLabel.textColor = UIColorFromRGB(COLOUR_ORANGE);
+            } else {
+                cell.dueInLabel.textColor = UIColorFromRGB(COLOUR_RED);
+            }
         }
     }
     
     if ([aJourney.journeyLate integerValue] > 0) {
-        cell.lateLabel.text = [NSString stringWithFormat:@"%ldm LATE", (long)[aJourney.journeyLate integerValue]];
+        cell.lateLabel.text = [NSString stringWithFormat:@"%ldm Late", (long)[aJourney.journeyLate integerValue]];
         cell.lateLabel.textColor = UIColorFromRGB(COLOUR_RED);
     }
     else {
-        cell.lateLabel.text = @"ON TIME";
+        cell.lateLabel.text = @"On Time";
         cell.lateLabel.textColor = UIColorFromRGB(COLOUR_GREEN);
     }
     
@@ -363,21 +388,46 @@
 }
 
 - (void)displayQueryTime {
+    LogIt(@"displayQueryTime");
     if ([_objects count] > 0) {
         Journey *aJourney = [_objects objectAtIndex:0];
         _formattedQueryDate = [aJourney.journeyQueryTime formattedAsTimeAgo];
-        NSString *refreshTitle = [NSString stringWithFormat:@"Updated %@", _formattedQueryDate];
-        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:refreshTitle];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *refreshTitle = [NSString stringWithFormat:@"Updated %@", _formattedQueryDate];
+            self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:refreshTitle];
+        });
     }
+//    // Also update the stopwatch time
+//    [self updateStopwatchTime];
 }
 
 #pragma mark - UITextField and stopwatch methods
 
+//- (void)updateStopwatchTime {
+//    LogIt(@"updateStopwatchTime");
+//    if (_currentStopwatchTimer) {
+//        float timeAsFloat = [_currentStopwatchTimer floatValue];
+//        timeAsFloat = (timeAsFloat - 0.5);
+//        if (timeAsFloat <= 0.0)
+//            timeAsFloat = 0.0f;
+//        _currentStopwatchTimer = @(timeAsFloat);
+//        [self configureNavigationBarButtons];
+//        [self.tableView reloadData];
+//    } else {
+//        _currentStopwatchTimer = @(0.0f);
+//    }
+//}
+
 - (void)stopwatchAction {
     LogIt(@"stopwatchAction");
+//    [self updateStopwatchTime];
+    if ([_currentStopwatchTimer floatValue] > 0.0f) {
+        self.stopwatchTime.text = [NSString stringWithFormat:@"%d", [_currentStopwatchTimer integerValue]];
+    } else {
+        self.stopwatchTime.text = @"";
+    }
     [self.view addSubview:self.stopwatchView];
     [self.tableView setContentOffset:CGPointMake(self.stopwatchView.frame.origin.x, self.stopwatchView.frame.origin.y)];
-    self.stopwatchTime.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTime"];
     [self.stopwatchTime becomeFirstResponder];
 }
 
@@ -407,6 +457,8 @@
     [self.stopwatchTime resignFirstResponder];
     // Save the time specified to defaults
     [[NSUserDefaults standardUserDefaults] setValue:self.stopwatchTime.text forKey:@"WalkToStationTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    _currentStopwatchTimer = [NSNumber numberWithFloat:[self.stopwatchTime.text floatValue]];
     [self refreshTriggered];
 }
 
@@ -415,6 +467,8 @@
     [self.stopwatchTime resignFirstResponder];
     // Save the time specified to defaults
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"WalkToStationTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    _currentStopwatchTimer = @0.0f;
     [self refreshTriggered];
 }
 

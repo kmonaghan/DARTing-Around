@@ -10,6 +10,8 @@
 #import <HockeySDK/HockeySDK.h>
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <TSMessages/TSMessage.h>
+#import <NewRelicAgent/NewRelicAgent.h>
+#import "Mixpanel.h"
 
 @interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate>
 @end
@@ -28,6 +30,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     LogIt(@"application didFinishLaunchingWithOptions");
+    // New Relic
+    [NewRelicAgent startWithApplicationToken:NEW_RELIC_ID];
     // HockeyApp
     [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:HOCKEY_TEST
                                                          liveIdentifier:HOCKEY_LIVE
@@ -39,6 +43,10 @@
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
     }
+    // Mixpanel
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Application Started" properties:nil];
     //
     [self configureReachability];
     //

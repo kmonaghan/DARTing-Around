@@ -12,6 +12,7 @@
 #import <TBXML/TBXML.h>
 #import "Station.h"
 #import "Journey.h"
+#import "Mixpanel.h"
 
 @interface IrishRailDataManager () <NSXMLParserDelegate> {
     NSNumber *stationCount;
@@ -143,6 +144,11 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self fetchAllJourneysForStationFailedWithError:error];
     }];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"API Request Run" properties:@{
+                                                    @"Type": @"Journeys",
+                                                    @"Option": stationCode
+                                                    }];
 }
 
 - (void)fetchAllJourneysForStationFailedWithError:(NSError *)error {
@@ -150,6 +156,10 @@
     if ([self.delegate respondsToSelector:@selector(receivedJourneyData:)]) {
         [self.delegate receivedJourneyData:nil];
     }
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"API Request Failed" properties:@{
+                                                    @"Type": @"Journeys"
+                                                    }];
 }
 
 - (void)fetchAllStations {
@@ -266,6 +276,11 @@
         LogIt(@"fetchAllStationsFromServer :: AFHTTPRequestOperation Error: %@", error);
         [self fetchStationsFailedWithError:error];
     }];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"API Request Run" properties:@{
+                                                  @"Type": @"Stations",
+                                                  @"Option": @""
+                                                  }];
 }
 
 - (void)fetchStationsFailedWithError:(NSError *)error {
@@ -273,6 +288,10 @@
     if ([self.delegate respondsToSelector:@selector(receivedStationData:)]) {
         [self.delegate receivedStationData:nil];
     }
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"API Request Failed" properties:@{
+                                                       @"Type": @"Stations"
+                                                       }];
 }
 
 #pragma mark - Management Methods
