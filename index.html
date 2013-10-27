@@ -127,10 +127,17 @@
 <li>Mixpanel and New Relic monitoring are now in.</li>
 <li>Startup image.</li>
 <li>Altered fonts and colours  a bit.</li>
-<li>Set up Mac OS X Continuous Integration Server and bots.</li>
+<li>Set up Mac OS X Continuous Integration Server and bots. But it's failing</li>
 </ul>
 
-<p></p>
+
+<h3>
+<a name="day-7--sunday-night" class="anchor" href="#day-7--sunday-night"><span class="octicon octicon-link"></span></a>Day 7 / Sunday Night</h3>
+
+<p>On the first attempt to integrate this project the server CI builds were all failing with the error:</p>
+<p>Integration failed.  The bot did not find a scheme named "DARTingAround Alpha Beta".  The bot will not be able to integrate successfully until the scheme "DARTingAround Alpha Beta" has been shared ￼ and it has been committed to the source control repository. </p>
+<p>The problem is, that scheme had been shared, and the source had been committed to the Mac OS X server remote repository. I didn't find much of use in the usual places (like Stack Overflow) so I started to experiment with this a bit and eventually found the problem.</p>
+<p>This project is using an Xcode workspace, which I don't always do, but CocoaPods requires this. Turns out that sharing the Scheme in Xcode is not enough to get the CI build working if you are using a workspace, you have to set the container for the scheme to the workspace and not the component project. Once that was done the build integrated successfully. Lovely!</p>
 
 
 
