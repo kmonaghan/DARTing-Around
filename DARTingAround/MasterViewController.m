@@ -23,6 +23,7 @@
 @implementation MasterViewController
 
 - (void)customiseAppearance {
+    LogIt(@"customiseAppearance");
 //    [[UIApplication sharedApplication] keyWindow].tintColor = [UIColor greenColor];
 }
 
