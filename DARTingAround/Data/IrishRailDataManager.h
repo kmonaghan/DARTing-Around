@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Train.h"
 
 @protocol IrishRailDataManagerDelegate <NSObject>
 @optional
 - (void)receivedStationData:(NSArray *)stationsArray;
 - (void)receivedJourneyData:(NSArray *)journeysArray;
+- (void)receivedTrainData:(Train *)trainData;
 @end
 
 
@@ -21,5 +23,6 @@
 
 - (void)fetchAllStations;
 - (void)fetchAllJourneysForStation:(NSString *)stationCode;
+- (void)fetchDataForTrain:(NSString *)trainCode;
 
 @end

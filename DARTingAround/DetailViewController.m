@@ -12,6 +12,7 @@
 #import "JourneyCell.h"
 #import <TSMessages/TSMessage.h>
 #import "NSDate+NVTimeAgo.h"
+#import "TrainViewController.h"
 
 @interface DetailViewController () <IrishRailDataManagerDelegate, UITextFieldDelegate> {
     NSMutableArray *_objects;
@@ -305,14 +306,15 @@
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     LogIt(@"prepareForSegue");
-//    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        Station *object = _objects[indexPath.row];
-//        [[segue destinationViewController] setDetailStation:object];
-//    }
+    if ([[segue identifier] isEqualToString:@"showJourney"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Journey *object = _objects[indexPath.row];
+        [[segue destinationViewController] setDetailJourney:object];
+        // Hide the text on the back button
+        self.title = @"";
+    }
 }
 
 - (void)updateTable

@@ -42,6 +42,9 @@
 		657214D61810959F00EC7D53 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657214D51810959F00EC7D53 /* CoreText.framework */; };
 		657214D8181095AA00EC7D53 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657214D7181095AA00EC7D53 /* QuartzCore.framework */; };
 		657214DA181095B400EC7D53 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657214D9181095B400EC7D53 /* SystemConfiguration.framework */; };
+		659B4641181AB6A100BA1266 /* TrainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659B4640181AB6A100BA1266 /* TrainViewController.m */; };
+		659B4642181AB6A100BA1266 /* TrainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659B4640181AB6A100BA1266 /* TrainViewController.m */; };
+		659B4644181AC8CB00BA1266 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 659B4643181AC8CB00BA1266 /* MapKit.framework */; };
 		65D3C886180C17180030908B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D3C885180C17180030908B /* Foundation.framework */; };
 		65D3C888180C17180030908B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D3C887180C17180030908B /* CoreGraphics.framework */; };
 		65D3C88A180C17180030908B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D3C889180C17180030908B /* UIKit.framework */; };
@@ -151,6 +154,9 @@
 		657214D51810959F00EC7D53 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		657214D7181095AA00EC7D53 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		657214D9181095B400EC7D53 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		659B463F181AB6A100BA1266 /* TrainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainViewController.h; sourceTree = "<group>"; };
+		659B4640181AB6A100BA1266 /* TrainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainViewController.m; sourceTree = "<group>"; };
+		659B4643181AC8CB00BA1266 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		65D3C882180C17180030908B /* DARTingAround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DARTingAround.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D3C885180C17180030908B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65D3C887180C17180030908B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -216,6 +222,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6535D4B6180C5FA400A78458 /* CoreLocation.framework in Frameworks */,
+				659B4644181AC8CB00BA1266 /* MapKit.framework in Frameworks */,
 				65D3C88A180C17180030908B /* UIKit.framework in Frameworks */,
 				657214D8181095AA00EC7D53 /* QuartzCore.framework in Frameworks */,
 				65EC74581819BC140012C2F1 /* CoreTelephony.framework in Frameworks */,
@@ -225,7 +233,6 @@
 				65EC745A1819BC230012C2F1 /* libz.dylib in Frameworks */,
 				657214DA181095B400EC7D53 /* SystemConfiguration.framework in Frameworks */,
 				657214D61810959F00EC7D53 /* CoreText.framework in Frameworks */,
-				6535D4B6180C5FA400A78458 /* CoreLocation.framework in Frameworks */,
 				657214D21810949300EC7D53 /* HockeySDK.framework in Frameworks */,
 				65EC74561819BC020012C2F1 /* NewRelicAgent.framework in Frameworks */,
 				65D3C886180C17180030908B /* Foundation.framework in Frameworks */,
@@ -362,6 +369,7 @@
 		65D3C884180C17180030908B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				659B4643181AC8CB00BA1266 /* MapKit.framework */,
 				65EC747A1819C1090012C2F1 /* AdSupport.framework */,
 				65EC74781819C1010012C2F1 /* Accelerate.framework */,
 				65EC74591819BC230012C2F1 /* libz.dylib */,
@@ -452,6 +460,8 @@
 				65D3C8A1180C17190030908B /* DetailViewController.m */,
 				65E1E09D181416640043B3A1 /* JourneyCell.h */,
 				65E1E09E181416640043B3A1 /* JourneyCell.m */,
+				659B463F181AB6A100BA1266 /* TrainViewController.h */,
+				659B4640181AB6A100BA1266 /* TrainViewController.m */,
 				65E1E08C18117DC70043B3A1 /* AboutViewController.h */,
 				65E1E08D18117DC70043B3A1 /* AboutViewController.m */,
 			);
@@ -690,6 +700,7 @@
 				654618EA180D69B0009CA839 /* Journey.m in Sources */,
 				65EC74701819C0E50012C2F1 /* MPCSerializedJSONData.m in Sources */,
 				65EC74721819C0E50012C2F1 /* NSData+MPBase64.m in Sources */,
+				659B4641181AB6A100BA1266 /* TrainViewController.m in Sources */,
 				6535D4B3180C5EE700A78458 /* Train.m in Sources */,
 				65EC746E1819C0E50012C2F1 /* MPCJSONSerializer.m in Sources */,
 				65EC74761819C0E50012C2F1 /* Mixpanel.m in Sources */,
@@ -717,6 +728,7 @@
 				65410D581815D39C00A38C98 /* NSDate+NVTimeAgo.m in Sources */,
 				6535D4BA180C6E8300A78458 /* IrishRailDataManager.m in Sources */,
 				65EC74731819C0E50012C2F1 /* NSData+MPBase64.m in Sources */,
+				659B4642181AB6A100BA1266 /* TrainViewController.m in Sources */,
 				654618EB180D69B0009CA839 /* Journey.m in Sources */,
 				65EC746F1819C0E50012C2F1 /* MPCJSONSerializer.m in Sources */,
 				6535D4B0180C1C7100A78458 /* Station.m in Sources */,

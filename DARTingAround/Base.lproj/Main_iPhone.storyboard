@@ -311,6 +311,7 @@
                                     <outlet property="directionLabel" destination="Euj-TL-JG5" id="NyN-BM-cEr"/>
                                     <outlet property="dueInLabel" destination="VDS-e3-h2G" id="5Ch-Vu-6TS"/>
                                     <outlet property="lateLabel" destination="RYE-VF-hEs" id="Iix-m7-CsH"/>
+                                    <segue destination="0yw-tY-hAf" kind="push" identifier="showJourney" id="pxO-t5-yaw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -334,6 +335,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0by-zw-Rd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="937" y="64"/>
+        </scene>
+        <!--Train View Controller-->
+        <scene sceneID="ttD-PW-dvS">
+            <objects>
+                <viewController id="0yw-tY-hAf" customClass="TrainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2mW-5u-5Bb"/>
+                        <viewControllerLayoutGuide type="bottom" id="0GP-5f-00g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eId-7O-1sj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KPY-qJ-BNC">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hKw-13-YnY"/>
+                    <connections>
+                        <outlet property="trainMapView" destination="KPY-qJ-BNC" id="YjQ-DK-riR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xKj-zP-qv4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1414" y="64"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

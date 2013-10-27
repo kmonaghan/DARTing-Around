@@ -23,6 +23,10 @@
 
 #pragma mark - Data Methods
 
+// ==========================================
+// JOURNEYS
+// ==========================================
+
 - (void)fetchAllJourneysForStation:(NSString *)stationCode {
     LogIt(@"fetchAllJourneysForStation :: stationCode: %@", stationCode);
     if ([stationCode length] == 0) return;
@@ -162,6 +166,10 @@
                                                     }];
 }
 
+// ==========================================
+// STATIONS
+// ==========================================
+
 - (void)fetchAllStations {
     LogIt(@"fetchAllStations");
     // If an array of stations already exists return that, then update that list in the background if required (once per day)
@@ -291,6 +299,92 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"API Request Failed" properties:@{
                                                        @"Type": @"Stations"
+                                                       }];
+}
+
+// ==========================================
+// TRAINS
+// ==========================================
+
+- (void)fetchDataForTrain:(NSString *)requiredTrainCode {
+    LogIt(@"fetchDataForTrain");
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer new];
+    [manager GET:@"http://api.irishrail.ie/realtime/realtime.asmx/getCurrentTrainsXML_WithTrainType?TrainType=D" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        __block Train *myTrain; // Only looking for data on one train
+        NSString *strData = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        LogIt(@"fetchDataForTrain :: XML (Stringified): %@", strData);
+        //
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            TBXML *sourceXML = [[TBXML alloc] initWithXMLData:responseObject error:nil];
+            if (!sourceXML) {
+                [self fetchTrainFailedWithError:nil];
+                return;
+            }
+            TBXMLElement *rootElement = sourceXML.rootXMLElement;
+            if (!rootElement) {
+                [self fetchTrainFailedWithError:nil];
+                return;
+            }
+            TBXMLElement *trainElement = [TBXML childElementNamed:@"objTrainPositions" parentElement:rootElement];
+            if (!trainElement) {
+                [self fetchTrainFailedWithError:nil];
+                return;
+            }
+            do {
+                TBXMLElement *codeElement = [TBXML childElementNamed:@"TrainCode" parentElement:trainElement];
+                NSString *trainCode = [TBXML textForElement:codeElement];
+                
+                if ([trainCode isEqualToString:requiredTrainCode]) {
+                    TBXMLElement *statusElement = [TBXML childElementNamed:@"TrainStatus" parentElement:trainElement];
+                    NSString *trainStatus = [TBXML textForElement:statusElement];
+                    
+                    TBXMLElement *messageElement = [TBXML childElementNamed:@"PublicMessage" parentElement:trainElement];
+                    NSString *trainPublicMessage = [TBXML textForElement:messageElement];
+                    
+                    TBXMLElement *directionElement = [TBXML childElementNamed:@"Direction" parentElement:trainElement];
+                    NSString *trainDirection = [TBXML textForElement:directionElement];
+                    
+                    TBXMLElement *latElement = [TBXML childElementNamed:@"TrainLatitude" parentElement:trainElement];
+                    CLLocationDegrees trainLat = [[TBXML textForElement:latElement] doubleValue];
+                    
+                    TBXMLElement *lngElement = [TBXML childElementNamed:@"TrainLongitude" parentElement:trainElement];
+                    CLLocationDegrees trainLng = [[TBXML textForElement:lngElement] doubleValue];
+                    
+                    LogIt(@"fetchDataForTrain :: Found train: %@", trainCode);
+                    myTrain = [[Train alloc] initWithTrainCode:trainCode
+                                                        status:trainStatus
+                                                       message:trainPublicMessage
+                                                     direction:trainDirection
+                                                           lat:trainLat
+                                                           lng:trainLng];
+                }
+            } while ((trainElement = trainElement->nextSibling) != nil);
+            // Now return the data for the one train we are interested in
+            if ([self.delegate respondsToSelector:@selector(receivedTrainData:)]) {
+                LogIt(@"fetchDataForTrain :: Telling delegate we found data");
+                [self.delegate receivedTrainData:myTrain];
+            }
+        });
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        LogIt(@"fetchDataForTrain :: AFHTTPRequestOperation Error: %@", error);
+        [self fetchTrainFailedWithError:error];
+    }];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"API Request Run" properties:@{
+                                                    @"Type": @"Train",
+                                                    @"Option": requiredTrainCode
+                                                    }];
+}
+
+- (void)fetchTrainFailedWithError:(NSError *)error {
+    LogIt(@"fetchTrainFailedWithError :: Error: %@", [[error userInfo] description]);
+    if ([self.delegate respondsToSelector:@selector(receivedTrainData:)]) {
+        [self.delegate receivedTrainData:nil];
+    }
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"API Request Failed" properties:@{
+                                                       @"Type": @"Train"
                                                        }];
 }
 
