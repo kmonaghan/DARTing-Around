@@ -13,6 +13,7 @@
 #import "Station.h"
 #import "Journey.h"
 #import "Mixpanel.h"
+#import "RouteStop.h"
 
 @interface IrishRailDataManager () <NSXMLParserDelegate> {
     NSNumber *stationCount;
@@ -385,6 +386,112 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"API Request Failed" properties:@{
                                                        @"Type": @"Train"
+                                                       }];
+}
+
+
+// ==========================================
+// ROUTE STOPS
+// ==========================================
+
+- (void)fetchAllRouteStopsForTrain:(NSString *)trainCode {
+    LogIt(@"fetchAllRouteStopsForTrain :: trainCode: %@", trainCode);
+    if ([trainCode length] == 0) return;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer new];
+    
+    
+    
+    // TODO: Probably needs encoded date, like:
+    // http://api.irishrail.ie/realtime/realtime.asmx/getTrainMovementsXML?TrainId=e109&TrainDate=21%20dec%202011
+    
+    
+    
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.irishrail.ie/realtime/realtime.asmx/getTrainMovementsXML?TrainId=%@", trainCode]; // May need date
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableArray *stopsArray = [NSMutableArray array];
+        NSString *strData = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        LogIt(@"fetchAllRouteStopsForTrain :: responseObject (Stringified): %@", strData);
+        //
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSError *initError;
+            TBXML *sourceXML = [[TBXML alloc] initWithXMLData:responseObject error:&initError];
+            if (!sourceXML) {
+                [self fetchAllStopsForTrainFailedWithError:nil];
+                return;
+            }
+            TBXMLElement *rootElement = sourceXML.rootXMLElement;
+            if (!rootElement) {
+                [self fetchAllStopsForTrainFailedWithError:nil];
+                return;
+            }
+            TBXMLElement *stopElement = [TBXML childElementNamed:@"objTrainMovements" parentElement:rootElement];
+            if (!stopElement) {
+                [self fetchAllStopsForTrainFailedWithError:nil];
+                return;
+            }
+            do {
+                NSMutableDictionary *stopDict = [NSMutableDictionary new];
+                //
+                TBXMLElement *codeElement = [TBXML childElementNamed:@"TrainCode" parentElement:stopElement];
+                [stopDict setObject:[TBXML textForElement:codeElement] forKey:@"stopTrainCode"];
+                
+                TBXMLElement *locationCodeElement = [TBXML childElementNamed:@"LocationCode" parentElement:stopElement];
+                [stopDict setObject:[TBXML textForElement:locationCodeElement] forKey:@"stopLocationCode"];
+                
+                TBXMLElement *locationNameElement = [TBXML childElementNamed:@"LocationFullName" parentElement:stopElement];
+                [stopDict setObject:[TBXML textForElement:locationNameElement] forKey:@"stopLocationFullName"];
+                
+                TBXMLElement *locationOrderElement = [TBXML childElementNamed:@"LocationOrder" parentElement:stopElement];
+                [stopDict setObject:@([[TBXML textForElement:locationOrderElement] integerValue]) forKey:@"stopLocationOrder"];
+                
+                TBXMLElement *typeElement = [TBXML childElementNamed:@"LocationType" parentElement:stopElement];
+                [stopDict setObject:[TBXML textForElement:typeElement] forKey:@"stopLocationType"];
+                
+                TBXMLElement *originElement = [TBXML childElementNamed:@"TrainOrigin" parentElement:stopElement];
+                [stopDict setObject:[TBXML textForElement:originElement] forKey:@"stopOrigin"];
+                
+                TBXMLElement *destinationElement = [TBXML childElementNamed:@"TrainDestination" parentElement:stopElement];
+                [stopDict setObject:[TBXML textForElement:destinationElement] forKey:@"stopDestination"];
+                
+                TBXMLElement *stopTypeElement = [TBXML childElementNamed:@"StopType" parentElement:stopElement];
+                [stopDict setObject:[TBXML textForElement:stopTypeElement] forKey:@"stopStopType"];
+                
+                RouteStop *thisStop = [[RouteStop alloc] initStopWithDictionary:stopDict];
+                [stopsArray addObject:thisStop];
+            } while ((stopElement = stopElement->nextSibling) != nil);
+            // Found an array of stops, sort it
+            NSArray *sortedArray;
+            sortedArray = [stopsArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+                NSNumber *first = [(RouteStop*)a stopLocationOrder];
+                NSNumber *second = [(RouteStop*)b stopLocationOrder];
+                return [first compare:second];
+            }];
+            // Now return the sorted array
+            if ([self.delegate respondsToSelector:@selector(receivedStopsData:)]) {
+                LogIt(@"fetchAllRouteStopsForTrain :: Telling delegate we found stops");
+                [self.delegate receivedStopsData:[NSArray arrayWithArray:stopsArray]];
+            }
+        });
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self fetchAllStopsForTrainFailedWithError:error];
+    }];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"API Request Run" properties:@{
+                                                    @"Type": @"RouteStops",
+                                                    @"Option": trainCode
+                                                    }];
+}
+
+- (void)fetchAllStopsForTrainFailedWithError:(NSError *)error {
+    LogIt(@"fetchAllStopsForTrainFailedWithError :: Error: %@", [[error userInfo] description]);
+    if ([self.delegate respondsToSelector:@selector(receivedStopsData:)]) {
+        [self.delegate receivedStopsData:nil];
+    }
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"API Request Failed" properties:@{
+                                                       @"Type": @"RouteStops"
                                                        }];
 }
 

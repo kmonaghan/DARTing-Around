@@ -11,6 +11,9 @@
 		65043C7D181061050048FBB1 /* LogoAlpha@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65043C79181061050048FBB1 /* LogoAlpha@2x.png */; };
 		65043C7E181061050048FBB1 /* LogoBeta.png in Resources */ = {isa = PBXBuildFile; fileRef = 65043C7A181061050048FBB1 /* LogoBeta.png */; };
 		65043C7F181061050048FBB1 /* LogoBeta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65043C7B181061050048FBB1 /* LogoBeta@2x.png */; };
+		651FB75B181EFA1200E825DC /* RouteStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 651FB75A181EFA1200E825DC /* RouteStop.m */; };
+		651FB75E181F006800E825DC /* RouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651FB75D181F006800E825DC /* RouteViewController.m */; };
+		651FB75F181F006800E825DC /* RouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 651FB75D181F006800E825DC /* RouteViewController.m */; };
 		652981F8180CBFBD00B1305A /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 652981F6180CBFBD00B1305A /* Logo.png */; };
 		652981F9180CBFBD00B1305A /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652981F7180CBFBD00B1305A /* Logo@2x.png */; };
 		652C7E2318147AA100E8460F /* Logo-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 652C7E1918147AA100E8460F /* Logo-iPad.png */; };
@@ -42,8 +45,6 @@
 		657214D61810959F00EC7D53 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657214D51810959F00EC7D53 /* CoreText.framework */; };
 		657214D8181095AA00EC7D53 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657214D7181095AA00EC7D53 /* QuartzCore.framework */; };
 		657214DA181095B400EC7D53 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 657214D9181095B400EC7D53 /* SystemConfiguration.framework */; };
-		659B4641181AB6A100BA1266 /* TrainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659B4640181AB6A100BA1266 /* TrainViewController.m */; };
-		659B4642181AB6A100BA1266 /* TrainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659B4640181AB6A100BA1266 /* TrainViewController.m */; };
 		659B4644181AC8CB00BA1266 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 659B4643181AC8CB00BA1266 /* MapKit.framework */; };
 		65D3C886180C17180030908B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D3C885180C17180030908B /* Foundation.framework */; };
 		65D3C888180C17180030908B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D3C887180C17180030908B /* CoreGraphics.framework */; };
@@ -123,6 +124,10 @@
 		65043C79181061050048FBB1 /* LogoAlpha@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoAlpha@2x.png"; path = "Assets/LogoAlpha@2x.png"; sourceTree = "<group>"; };
 		65043C7A181061050048FBB1 /* LogoBeta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LogoBeta.png; path = Assets/LogoBeta.png; sourceTree = "<group>"; };
 		65043C7B181061050048FBB1 /* LogoBeta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LogoBeta@2x.png"; path = "Assets/LogoBeta@2x.png"; sourceTree = "<group>"; };
+		651FB759181EFA1200E825DC /* RouteStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RouteStop.h; path = Data/RouteStop.h; sourceTree = "<group>"; };
+		651FB75A181EFA1200E825DC /* RouteStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RouteStop.m; path = Data/RouteStop.m; sourceTree = "<group>"; };
+		651FB75C181F006800E825DC /* RouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteViewController.h; sourceTree = "<group>"; };
+		651FB75D181F006800E825DC /* RouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteViewController.m; sourceTree = "<group>"; };
 		652981F6180CBFBD00B1305A /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Logo.png; path = Assets/Logo.png; sourceTree = "<group>"; };
 		652981F7180CBFBD00B1305A /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo@2x.png"; path = "Assets/Logo@2x.png"; sourceTree = "<group>"; };
 		652C7E1918147AA100E8460F /* Logo-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-iPad.png"; path = "Assets/Logo-iPad.png"; sourceTree = "<group>"; };
@@ -154,8 +159,6 @@
 		657214D51810959F00EC7D53 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		657214D7181095AA00EC7D53 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		657214D9181095B400EC7D53 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		659B463F181AB6A100BA1266 /* TrainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainViewController.h; sourceTree = "<group>"; };
-		659B4640181AB6A100BA1266 /* TrainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainViewController.m; sourceTree = "<group>"; };
 		659B4643181AC8CB00BA1266 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		65D3C882180C17180030908B /* DARTingAround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DARTingAround.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D3C885180C17180030908B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -298,6 +301,8 @@
 				654618E9180D69B0009CA839 /* Journey.m */,
 				6535D4B1180C5EE700A78458 /* Train.h */,
 				6535D4B2180C5EE700A78458 /* Train.m */,
+				651FB759181EFA1200E825DC /* RouteStop.h */,
+				651FB75A181EFA1200E825DC /* RouteStop.m */,
 				6535D4B7180C6E8300A78458 /* IrishRailDataManager.h */,
 				6535D4B8180C6E8300A78458 /* IrishRailDataManager.m */,
 			);
@@ -460,10 +465,10 @@
 				65D3C8A1180C17190030908B /* DetailViewController.m */,
 				65E1E09D181416640043B3A1 /* JourneyCell.h */,
 				65E1E09E181416640043B3A1 /* JourneyCell.m */,
-				659B463F181AB6A100BA1266 /* TrainViewController.h */,
-				659B4640181AB6A100BA1266 /* TrainViewController.m */,
 				65E1E08C18117DC70043B3A1 /* AboutViewController.h */,
 				65E1E08D18117DC70043B3A1 /* AboutViewController.m */,
+				651FB75C181F006800E825DC /* RouteViewController.h */,
+				651FB75D181F006800E825DC /* RouteViewController.m */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -698,9 +703,10 @@
 				65E1E08E18117DC70043B3A1 /* AboutViewController.m in Sources */,
 				65410D571815D39C00A38C98 /* NSDate+NVTimeAgo.m in Sources */,
 				654618EA180D69B0009CA839 /* Journey.m in Sources */,
+				651FB75B181EFA1200E825DC /* RouteStop.m in Sources */,
 				65EC74701819C0E50012C2F1 /* MPCSerializedJSONData.m in Sources */,
+				651FB75E181F006800E825DC /* RouteViewController.m in Sources */,
 				65EC74721819C0E50012C2F1 /* NSData+MPBase64.m in Sources */,
-				659B4641181AB6A100BA1266 /* TrainViewController.m in Sources */,
 				6535D4B3180C5EE700A78458 /* Train.m in Sources */,
 				65EC746E1819C0E50012C2F1 /* MPCJSONSerializer.m in Sources */,
 				65EC74761819C0E50012C2F1 /* Mixpanel.m in Sources */,
@@ -728,13 +734,13 @@
 				65410D581815D39C00A38C98 /* NSDate+NVTimeAgo.m in Sources */,
 				6535D4BA180C6E8300A78458 /* IrishRailDataManager.m in Sources */,
 				65EC74731819C0E50012C2F1 /* NSData+MPBase64.m in Sources */,
-				659B4642181AB6A100BA1266 /* TrainViewController.m in Sources */,
 				654618EB180D69B0009CA839 /* Journey.m in Sources */,
 				65EC746F1819C0E50012C2F1 /* MPCJSONSerializer.m in Sources */,
 				6535D4B0180C1C7100A78458 /* Station.m in Sources */,
 				65E1E09C181413DA0043B3A1 /* StationCell.m in Sources */,
 				65D3C8B7180C17190030908B /* DARTingAroundTests.m in Sources */,
 				65EC746D1819C0E50012C2F1 /* MPCJSONDataSerializer.m in Sources */,
+				651FB75F181F006800E825DC /* RouteViewController.m in Sources */,
 				65E1E0A0181416640043B3A1 /* JourneyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

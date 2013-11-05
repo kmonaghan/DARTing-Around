@@ -14,6 +14,7 @@
 - (void)receivedStationData:(NSArray *)stationsArray;
 - (void)receivedJourneyData:(NSArray *)journeysArray;
 - (void)receivedTrainData:(Train *)trainData;
+- (void)receivedStopsData:(NSArray *)stopsArray;
 @end
 
 
@@ -24,5 +25,6 @@
 - (void)fetchAllStations;
 - (void)fetchAllJourneysForStation:(NSString *)stationCode;
 - (void)fetchDataForTrain:(NSString *)trainCode;
+- (void)fetchAllRouteStopsForTrain:(NSString *)trainCode;
 
 @end
