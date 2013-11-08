@@ -10,9 +10,12 @@
 
 @interface AboutViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIButton *closeButt;
+@property (strong, nonatomic) IBOutlet UIScrollView *containerScrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentsView;
+
 @property (strong, nonatomic) IBOutlet UILabel *versionLabel;
 
+- (IBAction)openLinkForTag:(id)sender;
 - (IBAction)tapCloseButt:(id)sender;
 
 @end

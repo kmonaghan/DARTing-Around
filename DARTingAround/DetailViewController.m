@@ -34,7 +34,6 @@
 
 - (void)fetchDataFromServer {
     LogIt(@"fetchDataFromServer");
-    [self.directionSegmentedController setSelectedSegmentIndex:1];
     [self.railDataManager fetchAllJourneysForStation:self.detailStation.stationCode];
 }
 
@@ -193,9 +192,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     LogIt(@"viewDidAppear");
     [super viewDidAppear:animated];
-    NSString *walkToStationTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTime"];
-    _currentStopwatchTimer = @([walkToStationTime floatValue]);
-//    [self updateStopwatchTime];
+    _currentStopwatchTimer = [self fetchCurrentWalkToStationTimeFromDefaults];
     [self configureNavigationBarButtons];
     if (([_objects count] == 0) && (self.detailStation)) {
         [self refreshTriggered];
@@ -311,7 +308,7 @@
     if ([[segue identifier] isEqualToString:@"showStops"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         Journey *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailTrain:object.journeyTrainCode];
+        [[segue destinationViewController] setDetailJourney:object];
         // Hide the text on the back button
         self.title = @"";
     }
@@ -364,7 +361,7 @@
         _originalObjectsArray = _objects;
         if ([_objects count] > 0) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self updateTable];
+                [self directionSegmentWasPicked:self.directionSegmentedController];
             });
         }
         [self displayQueryTime];
@@ -399,30 +396,12 @@
             self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:refreshTitle];
         });
     }
-//    // Also update the stopwatch time
-//    [self updateStopwatchTime];
 }
 
 #pragma mark - UITextField and stopwatch methods
 
-//- (void)updateStopwatchTime {
-//    LogIt(@"updateStopwatchTime");
-//    if (_currentStopwatchTimer) {
-//        float timeAsFloat = [_currentStopwatchTimer floatValue];
-//        timeAsFloat = (timeAsFloat - 0.5);
-//        if (timeAsFloat <= 0.0)
-//            timeAsFloat = 0.0f;
-//        _currentStopwatchTimer = @(timeAsFloat);
-//        [self configureNavigationBarButtons];
-//        [self.tableView reloadData];
-//    } else {
-//        _currentStopwatchTimer = @(0.0f);
-//    }
-//}
-
 - (void)stopwatchAction {
     LogIt(@"stopwatchAction");
-//    [self updateStopwatchTime];
     if ([_currentStopwatchTimer floatValue] > 0.0f) {
         self.stopwatchTime.text = [NSString stringWithFormat:@"%d", [_currentStopwatchTimer integerValue]];
     } else {
@@ -457,9 +436,8 @@
 - (IBAction)tapStopwatchGoButton:(id)sender {
     LogIt(@"tapStopwatchGoButton");
     [self.stopwatchTime resignFirstResponder];
-    // Save the time specified to defaults
-    [[NSUserDefaults standardUserDefaults] setValue:self.stopwatchTime.text forKey:@"WalkToStationTime"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSNumber *stopwatchTimeToSave = @([self.stopwatchTime.text integerValue]);
+    [self saveCurrentWalkToStationTimeToDefaults:stopwatchTimeToSave];
     _currentStopwatchTimer = [NSNumber numberWithFloat:[self.stopwatchTime.text floatValue]];
     [self refreshTriggered];
 }
@@ -467,9 +445,7 @@
 - (void)tapStopwatchCancelButton {
     LogIt(@"tapStopwatchCancelButton");
     [self.stopwatchTime resignFirstResponder];
-    // Save the time specified to defaults
-    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"WalkToStationTime"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self saveCurrentWalkToStationTimeToDefaults:@0];
     _currentStopwatchTimer = @0.0f;
     [self refreshTriggered];
 }
@@ -484,6 +460,58 @@
     LogIt(@"touchesBegan");
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
+}
+
+- (NSNumber *)fetchCurrentWalkToStationTimeFromDefaults {
+    LogIt(@"fetchCurrentWalkToStationTimeFromDefaults");
+    NSNumber *walkToStationTime = nil;
+    NSArray *walksArray = [NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTimeArray"]];
+    if ([walksArray count] > 0) {
+        NSDictionary *existingWalkTimeDict = [self findDictionaryWithValueForKey:self.detailStation.stationCode inArray:walksArray];
+        if (existingWalkTimeDict) {
+            walkToStationTime = existingWalkTimeDict[@"walkTime"];
+        }
+    }
+    return walkToStationTime;
+}
+
+- (void)saveCurrentWalkToStationTimeToDefaults:(NSNumber *)time {
+    LogIt(@"saveCurrentWalkToStationTimeToDefaults");
+    NSDictionary *walkTimeDict = @{@"stationCode": self.detailStation.stationCode, @"walkTime": time};
+    NSMutableArray *walksArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTimeArray"]];
+    if ([walksArray count] > 0) {
+        NSDictionary *existingWalkTimeDict = [self findDictionaryWithValueForKey:self.detailStation.stationCode inArray:walksArray ];
+        if (existingWalkTimeDict) {
+            NSUInteger objectIndex = [walksArray indexOfObject:existingWalkTimeDict];
+            [walksArray replaceObjectAtIndex:objectIndex withObject:walkTimeDict];
+        }
+        else {
+            [walksArray addObject:walkTimeDict];
+        }
+    }
+    else {
+        [walksArray addObject:walkTimeDict];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:walksArray forKey:@"WalkToStationTimeArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSDictionary *)findDictionaryWithValueForKey:(NSString *)name inArray:(NSArray *)myArray {
+    __block BOOL found = NO;
+    __block NSDictionary *dict = nil;
+    [myArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        dict = (NSDictionary *)obj;
+        NSString *title = [dict valueForKey:@"stationCode"];
+        if ([title isEqualToString:name]) {
+            found = YES;
+            *stop = YES;
+        }
+    }];
+    if (found) {
+        return dict;
+    } else {
+        return nil;
+    }
 }
 
 @end

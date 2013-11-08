@@ -12,6 +12,7 @@
 #import <TSMessages/TSMessage.h>
 #import <NewRelicAgent/NewRelicAgent.h>
 #import "Mixpanel.h"
+#import <AmazonInsightsSDK/AmazonInsightsSDK.h>
 
 @interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate>
 @end
@@ -47,6 +48,13 @@
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Application Started" properties:nil];
+    // Amazon
+    id<AIInsightsOptions> options = [AIAmazonInsights optionsWithAllowEventCollection:YES
+                                                                 withAllowWANDelivery:YES];
+    id<AIInsightsCredentials> credentials = [AIAmazonInsights credentialsWithApplicationKey:AMAZON_PUBLIC_KEY
+                                                                             withPrivateKey:AMAZON_PRIVATE_KEY];
+    AIAmazonInsights* insights = [AIAmazonInsights insightsWithCredentials:credentials
+                                                               withOptions:options];
     //
     [self configureReachability];
     //

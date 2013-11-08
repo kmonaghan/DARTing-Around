@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "IrishRailDataManager.h"
+#import "Journey.h"
 
 @interface RouteViewController : UITableViewController
 
 @property (nonatomic, retain) IrishRailDataManager *railDataManager;
-@property (nonatomic, strong) NSString *detailTrain;
+@property (nonatomic, strong) Journey *detailJourney;
 
 @end

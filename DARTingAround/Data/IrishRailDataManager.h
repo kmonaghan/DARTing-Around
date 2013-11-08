@@ -25,6 +25,6 @@
 - (void)fetchAllStations;
 - (void)fetchAllJourneysForStation:(NSString *)stationCode;
 - (void)fetchDataForTrain:(NSString *)trainCode;
-- (void)fetchAllRouteStopsForTrain:(NSString *)trainCode;
+- (void)fetchAllRouteStopsForTrain:(NSString *)trainCode onDate:(NSString *)trainDate;
 
 @end

@@ -16,4 +16,6 @@
 @property (nonatomic, strong) DetailViewController *detailViewController;
 @property (nonatomic, retain) IrishRailDataManager *railDataManager;
 
+- (IBAction)tapInfoButton:(id)sender;
+
 @end

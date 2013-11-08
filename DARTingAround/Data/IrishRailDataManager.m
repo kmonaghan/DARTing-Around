@@ -394,8 +394,8 @@
 // ROUTE STOPS
 // ==========================================
 
-- (void)fetchAllRouteStopsForTrain:(NSString *)trainCode {
-    LogIt(@"fetchAllRouteStopsForTrain :: trainCode: %@", trainCode);
+- (void)fetchAllRouteStopsForTrain:(NSString *)trainCode onDate:(NSString *)trainDate {
+    LogIt(@"fetchAllRouteStopsForTrain :: trainCode: %@ / %@", trainCode, trainDate);
     if ([trainCode length] == 0) return;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer new];
@@ -405,10 +405,22 @@
     // TODO: Probably needs encoded date, like:
     // http://api.irishrail.ie/realtime/realtime.asmx/getTrainMovementsXML?TrainId=e109&TrainDate=21%20dec%202011
     
+    /*
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateFormat:@"dd"];
+    NSString *dateDay = [NSString stringWithFormat:@"%@", [df stringFromDate:[NSDate date]]];
+    [df setDateFormat:@"MMM"];
+    NSString *dateMonth = [NSString stringWithFormat:@"%@", [df stringFromDate:[NSDate date]]];
+    [df setDateFormat:@"yyyy"];
+    NSString *dateYear = [NSString stringWithFormat:@"%@", [df stringFromDate:[NSDate date]]];
     
+    NSString *url = [NSString stringWithFormat:@"http://api.irishrail.ie/realtime/realtime.asmx/getTrainMovementsXML?TrainId=%@&TrainDate=%@%20%@%20%@", trainCode, dateDay, dateMonth, dateYear];
+    */
     
+    NSString *escapedDateString = [trainDate stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    NSString *url = [NSString stringWithFormat:@"http://api.irishrail.ie/realtime/realtime.asmx/getTrainMovementsXML?TrainId=%@&TrainDate=%@", trainCode, escapedDateString];
     
-    NSString *url = [NSString stringWithFormat:@"http://api.irishrail.ie/realtime/realtime.asmx/getTrainMovementsXML?TrainId=%@", trainCode]; // May need date
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray *stopsArray = [NSMutableArray array];
         NSString *strData = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];

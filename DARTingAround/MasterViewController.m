@@ -12,6 +12,7 @@
 #import "Station.h"
 #import "StationCell.h"
 #import <TSMessages/TSMessage.h>
+#import "AboutViewController.h"
 
 @interface MasterViewController () <IrishRailDataManagerDelegate> {
     NSMutableArray *_displayObjects;
@@ -178,6 +179,12 @@
                                 canBeDismisedByUser:YES];
         [self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:NO];
     }
+}
+
+- (IBAction)tapInfoButton:(id)sender {
+    LogIt(@"tapInfoButton");
+    AboutViewController *vc = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil];
+    [self presentViewController:vc animated:YES completion:^{}];
 }
 
 @end

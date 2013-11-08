@@ -9,6 +9,7 @@
 #import "RouteViewController.h"
 #import "RouteStop.h"
 #import <TSMessages/TSMessage.h>
+#import "RouteStopCell.h"
 
 @interface RouteViewController () <IrishRailDataManagerDelegate> {
     NSMutableArray *_displayObjects;
@@ -25,7 +26,7 @@
 
 - (void)fetchDataFromServer {
     LogIt(@"fetchDataFromServer");
-    [self.railDataManager fetchAllRouteStopsForTrain:self.detailTrain];
+    [self.railDataManager fetchAllRouteStopsForTrain:self.detailJourney.journeyTrainCode onDate:self.detailJourney.journeyTrainDate];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -92,10 +93,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LogIt(@"cellForRowAtIndexPath");
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    RouteStopCell *cell = (RouteStopCell *)[tableView dequeueReusableCellWithIdentifier:@"RouteStopCell" forIndexPath:indexPath];
+    RouteStop *aStop = _displayObjects[indexPath.row];
+    
+    cell.nameLabel.text = aStop.stopLocationFullName;
+    
+    UIImage *stopImage;
+    if ([aStop.stopLocationType isEqualToString:@"O"]) {
+        stopImage = [UIImage imageNamed:@"StopOrigin.png"];
+    }
+    else if ([aStop.stopLocationType isEqualToString:@"D"]) {
+        stopImage = [UIImage imageNamed:@"StopDestination.png"];
+    }
+    else if ([aStop.stopLocationType isEqualToString:@"T"]) {
+        stopImage = [UIImage imageNamed:@"StopTiming.png"];
+    }
+    else if ([aStop.stopLocationType isEqualToString:@"S"]) {
+        if ([aStop.stopStopType isEqualToString:@"C"]) {
+            stopImage = [UIImage imageNamed:@"StopCurrent.png"];
+        }
+        else if ([aStop.stopStopType isEqualToString:@"N"]) {
+            stopImage = [UIImage imageNamed:@"StopNext.png"];
+        }
+        else {
+            stopImage = [UIImage imageNamed:@"StopStop.png"];
+        }
+    }
+    cell.statusImage.image = stopImage;
     
     return cell;
 }
@@ -112,11 +137,11 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailTrain:(NSString *)newDetailTrain
+- (void)setDetailJourney:(Journey *)newDetailJourney
 {
-    LogIt(@"setDetailTrain");
-    if (_detailTrain != newDetailTrain) {
-        _detailTrain = newDetailTrain;
+    LogIt(@"setDetailJourney");
+    if (_detailJourney != newDetailJourney) {
+        _detailJourney = newDetailJourney;
     }
 }
 

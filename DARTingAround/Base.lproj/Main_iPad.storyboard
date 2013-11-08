@@ -233,11 +233,6 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="kul-fP-C6p" kind="popover" popoverAnchorView="JNZ-sc-jcN" id="ndQ-P9-7GJ">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -260,61 +255,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLD-UC-DBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-366" y="248"/>
-        </scene>
-        <!--About View Controller-->
-        <scene sceneID="MSX-wP-FGP">
-            <objects>
-                <viewController id="kul-fP-C6p" customClass="AboutViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4Bq-Xm-7nS"/>
-                        <viewControllerLayoutGuide type="bottom" id="BQS-Lz-dwq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="o8z-yi-wJQ">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgL-Ld-EuD">
-                                <rect key="frame" x="20" y="40" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="LSZ-gb-Hlv"/>
-                                    <constraint firstAttribute="width" constant="46" id="tTL-88-Prt"/>
-                                </constraints>
-                                <state key="normal" title="Close">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapCloseButt:" destination="kul-fP-C6p" eventType="touchUpInside" id="kOH-Nj-Phj"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fow-7j-gPq">
-                                <rect key="frame" x="20" y="527" width="728" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="BQS-Lz-dwq" firstAttribute="top" secondItem="fow-7j-gPq" secondAttribute="bottom" constant="20" id="9Nv-pI-OZH"/>
-                            <constraint firstAttribute="trailing" secondItem="fow-7j-gPq" secondAttribute="trailing" constant="-348" id="GdR-GU-hJM"/>
-                            <constraint firstItem="hgL-Ld-EuD" firstAttribute="leading" secondItem="o8z-yi-wJQ" secondAttribute="leading" constant="20" id="MHu-BA-2yg"/>
-                            <constraint firstItem="hgL-Ld-EuD" firstAttribute="top" secondItem="4Bq-Xm-7nS" secondAttribute="bottom" constant="20" id="MsV-oP-Dhr"/>
-                            <constraint firstItem="fow-7j-gPq" firstAttribute="leading" secondItem="o8z-yi-wJQ" secondAttribute="leading" constant="20" id="bR0-eN-UaI"/>
-                            <constraint firstItem="fow-7j-gPq" firstAttribute="top" secondItem="hgL-Ld-EuD" secondAttribute="bottom" constant="457" id="kau-O5-szt"/>
-                        </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <connections>
-                        <outlet property="closeButt" destination="hgL-Ld-EuD" id="OAE-bw-aQK"/>
-                        <outlet property="versionLabel" destination="fow-7j-gPq" id="GXn-Ye-FDh"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8GY-US-9bx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1280" y="-430"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
