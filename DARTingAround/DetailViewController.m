@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "IrishRailDataManager.h"
 #import "Station.h"
 #import "Journey.h"
 #import "JourneyCell.h"
@@ -56,8 +57,15 @@
     [self configureNavigationBarButtons];
 }
 
+- (void)removeNavigationBarButtons {
+    LogIt(@"removeNavigationBarButtons");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.navigationItem.rightBarButtonItems = @[];
+    });
+}
 - (void)configureNavigationBarButtons {
     LogIt(@"configureNavigationBarButtons");
+    self.navigationItem.rightBarButtonItems = nil;
     // Favourite station
     UIImage *favButtonImage;
     NSArray *favouriteStationsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"FavouriteStations"];
@@ -99,7 +107,7 @@
     if ([_currentStopwatchTimer floatValue] > 0.0f) {
         timerLabel.text = [NSString stringWithFormat:@"%d", [_currentStopwatchTimer integerValue]];
     } else {
-        timerLabel.text = @"";
+        timerLabel.text = @"0";
     }
     [buttView addSubview:timerLabel];
     
@@ -193,7 +201,6 @@
     LogIt(@"viewDidAppear");
     [super viewDidAppear:animated];
     _currentStopwatchTimer = [self fetchCurrentWalkToStationTimeFromDefaults];
-    [self configureNavigationBarButtons];
     if (([_objects count] == 0) && (self.detailStation)) {
         [self refreshTriggered];
         self.directionView.hidden = 0.0;
@@ -369,6 +376,7 @@
     else {
         [self performSelectorOnMainThread:@selector(showNothingFoundError) withObject:nil waitUntilDone:NO];
     }
+//    [self configureNavigationBarButtons];
 }
 
 - (void)showNothingFoundError {
@@ -402,6 +410,7 @@
 
 - (void)stopwatchAction {
     LogIt(@"stopwatchAction");
+    [self.tableView setScrollEnabled:NO];
     if ([_currentStopwatchTimer floatValue] > 0.0f) {
         self.stopwatchTime.text = [NSString stringWithFormat:@"%d", [_currentStopwatchTimer integerValue]];
     } else {
@@ -410,6 +419,8 @@
     [self.view addSubview:self.stopwatchView];
     [self.tableView setContentOffset:CGPointMake(self.stopwatchView.frame.origin.x, self.stopwatchView.frame.origin.y)];
     [self.stopwatchTime becomeFirstResponder];
+    //
+    [self removeNavigationBarButtons];
 }
 
 - (void)createAccessoryView {
@@ -435,6 +446,7 @@
 
 - (IBAction)tapStopwatchGoButton:(id)sender {
     LogIt(@"tapStopwatchGoButton");
+    [self.tableView setScrollEnabled:YES];
     [self.stopwatchTime resignFirstResponder];
     NSNumber *stopwatchTimeToSave = @([self.stopwatchTime.text integerValue]);
     [self saveCurrentWalkToStationTimeToDefaults:stopwatchTimeToSave];
@@ -444,6 +456,7 @@
 
 - (void)tapStopwatchCancelButton {
     LogIt(@"tapStopwatchCancelButton");
+    [self.tableView setScrollEnabled:YES];
     [self.stopwatchTime resignFirstResponder];
     [self saveCurrentWalkToStationTimeToDefaults:@0];
     _currentStopwatchTimer = @0.0f;
@@ -477,6 +490,11 @@
 
 - (void)saveCurrentWalkToStationTimeToDefaults:(NSNumber *)time {
     LogIt(@"saveCurrentWalkToStationTimeToDefaults");
+    if ([time integerValue] > 80) {
+        time = @80;
+        self.stopwatchTime.text = [time stringValue];
+    }
+    //
     NSDictionary *walkTimeDict = @{@"stationCode": self.detailStation.stationCode, @"walkTime": time};
     NSMutableArray *walksArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"WalkToStationTimeArray"]];
     if ([walksArray count] > 0) {

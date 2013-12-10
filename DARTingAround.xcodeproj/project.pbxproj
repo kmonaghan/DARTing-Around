@@ -58,6 +58,7 @@
 		659890C7182B0A9300EEA5E9 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 659890C5182B0A9300EEA5E9 /* AboutView.xib */; };
 		659890C8182B0A9300EEA5E9 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 659890C5182B0A9300EEA5E9 /* AboutView.xib */; };
 		659B4644181AC8CB00BA1266 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 659B4643181AC8CB00BA1266 /* MapKit.framework */; };
+		65B1888D18520D380033D131 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B1888C18520D380033D131 /* NewRelicAgent.framework */; };
 		65D3C886180C17180030908B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D3C885180C17180030908B /* Foundation.framework */; };
 		65D3C888180C17180030908B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D3C887180C17180030908B /* CoreGraphics.framework */; };
 		65D3C88A180C17180030908B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D3C889180C17180030908B /* UIKit.framework */; };
@@ -114,7 +115,6 @@
 		65E8C28618188935002F86B5 /* stopwatch_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C28318188935002F86B5 /* stopwatch_on.png */; };
 		65E8C28718188935002F86B5 /* stopwatch_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C28418188935002F86B5 /* stopwatch_on@2x.png */; };
 		65E8C28818188935002F86B5 /* stopwatch_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E8C28418188935002F86B5 /* stopwatch_on@2x.png */; };
-		65EC74561819BC020012C2F1 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EC74551819BC020012C2F1 /* NewRelicAgent.framework */; };
 		65EC74581819BC140012C2F1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EC74571819BC140012C2F1 /* CoreTelephony.framework */; };
 		65EC745A1819BC230012C2F1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EC74591819BC230012C2F1 /* libz.dylib */; };
 		65EC746C1819C0E50012C2F1 /* MPCJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC745F1819C0E50012C2F1 /* MPCJSONDataSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -201,6 +201,7 @@
 		6582C1E6182C23FD00EDB90D /* StopNext@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StopNext@2x.png"; sourceTree = "<group>"; };
 		659890C6182B0A9300EEA5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = DARTingAround/Base.lproj/AboutView.xib; sourceTree = "<group>"; };
 		659B4643181AC8CB00BA1266 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		65B1888C18520D380033D131 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = Libs/NewRelic/NewRelicAgent.framework; sourceTree = "<group>"; };
 		65D3C882180C17180030908B /* DARTingAround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DARTingAround.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D3C885180C17180030908B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65D3C887180C17180030908B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -251,7 +252,6 @@
 		65E8C27E18186F15002F86B5 /* stopwatch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopwatch@2x.png"; sourceTree = "<group>"; };
 		65E8C28318188935002F86B5 /* stopwatch_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopwatch_on.png; sourceTree = "<group>"; };
 		65E8C28418188935002F86B5 /* stopwatch_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopwatch_on@2x.png"; sourceTree = "<group>"; };
-		65EC74551819BC020012C2F1 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = Libs/NewRelic_iOS_Agent_1.376/NewRelicAgent.framework; sourceTree = "<group>"; };
 		65EC74571819BC140012C2F1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		65EC74591819BC230012C2F1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		65EC745E1819C0E50012C2F1 /* MPCJSONDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCJSONDataSerializer.h; sourceTree = "<group>"; };
@@ -290,9 +290,9 @@
 				65717B01182AC31900D33E4A /* AmazonInsightsSDK.framework in Frameworks */,
 				65EC745A1819BC230012C2F1 /* libz.dylib in Frameworks */,
 				657214DA181095B400EC7D53 /* SystemConfiguration.framework in Frameworks */,
+				65B1888D18520D380033D131 /* NewRelicAgent.framework in Frameworks */,
 				657214D61810959F00EC7D53 /* CoreText.framework in Frameworks */,
 				657214D21810949300EC7D53 /* HockeySDK.framework in Frameworks */,
-				65EC74561819BC020012C2F1 /* NewRelicAgent.framework in Frameworks */,
 				65D3C886180C17180030908B /* Foundation.framework in Frameworks */,
 				E4EAF12DC6654088B84B59A2 /* libPods.a in Frameworks */,
 			);
@@ -441,12 +441,12 @@
 		65D3C884180C17180030908B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65B1888C18520D380033D131 /* NewRelicAgent.framework */,
 				659B4643181AC8CB00BA1266 /* MapKit.framework */,
 				65EC747A1819C1090012C2F1 /* AdSupport.framework */,
 				65EC74781819C1010012C2F1 /* Accelerate.framework */,
 				65EC74591819BC230012C2F1 /* libz.dylib */,
 				65EC74571819BC140012C2F1 /* CoreTelephony.framework */,
-				65EC74551819BC020012C2F1 /* NewRelicAgent.framework */,
 				657214D9181095B400EC7D53 /* SystemConfiguration.framework */,
 				657214D7181095AA00EC7D53 /* QuartzCore.framework */,
 				657214D51810959F00EC7D53 /* CoreText.framework */,
@@ -978,8 +978,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/baz/Dropbox/Code/DARTingAround/Libs/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
-					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic_iOS_Agent_1.376,
 					/Users/baz/Dropbox/Code/DARTingAround/Libs/Amazon,
+					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DARTingAround/DARTingAround-Prefix.pch";
@@ -1130,8 +1130,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/baz/Dropbox/Code/DARTingAround/Libs/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
-					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic_iOS_Agent_1.376,
 					/Users/baz/Dropbox/Code/DARTingAround/Libs/Amazon,
+					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DARTingAround/DARTingAround-Prefix.pch";
@@ -1177,8 +1177,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/baz/Dropbox/Code/DARTingAround/Libs/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
-					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic_iOS_Agent_1.376,
 					/Users/baz/Dropbox/Code/DARTingAround/Libs/Amazon,
+					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DARTingAround/DARTingAround-Prefix.pch";

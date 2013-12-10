@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IrishRailDataManager.h"
-#import "Journey.h"
+
+@class IrishRailDataManager;
+@class Journey;
 
 @interface RouteViewController : UITableViewController
 

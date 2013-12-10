@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IrishRailDataManager.h"
 
 @class DetailViewController;
+@class IrishRailDataManager;
 
 @interface MasterViewController : UITableViewController
 

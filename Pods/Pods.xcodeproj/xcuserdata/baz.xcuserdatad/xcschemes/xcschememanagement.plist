@@ -3,30 +3,66 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict/>
+	<dict>
+		<key>Pods-AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-HexColors.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Lookback.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TBXML.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-TSMessages.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>039C7C7658EE486CAED81D25</key>
+		<key>2094575D8C7640ECBDD2F153</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6EE708651E29475381D953F2</key>
+		<key>25DF035FAF54406FB1BADC53</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>71C36361430F426F86CF1CFB</key>
+		<key>5649F0E87CCE42138E7EE392</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8CA68CFF122D4E658F6520C8</key>
+		<key>747051C4048A40C4B1AE4BEC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B314D52CBADB4C9FBCD98FCA</key>
+		<key>971E8601E4934555B608EC58</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BB80AEB65F444C89FCBD3F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

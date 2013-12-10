@@ -93,12 +93,16 @@
             [self openLinkInTwitterAppForUsername:@"theothernt"];
             break;
         
-        case 117: // Oisin
+        case 117: // Oisin H
             [self openLinkInTwitterAppForUsername:@"oisin"];
             break;
         
         case 118: // Damo
             [self openLinkInTwitterAppForUsername:@"DamianOS3"];
+            break;
+            
+        case 119: // Oisin P
+            [self openLinkInTwitterAppForUsername:@"prendio2"];
             break;
             
         case 121: // Nikil Viswanathan

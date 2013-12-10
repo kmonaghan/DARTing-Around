@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Station.h"
-#import "IrishRailDataManager.h"
+
+@class Station;
+@class IrishRailDataManager;
 
 @interface DetailViewController : UITableViewController <UISplitViewControllerDelegate>
 

@@ -7,6 +7,8 @@
 //
 
 #import "RouteViewController.h"
+#import "IrishRailDataManager.h"
+#import "Journey.h"
 #import "RouteStop.h"
 #import <TSMessages/TSMessage.h>
 #import "RouteStopCell.h"

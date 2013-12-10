@@ -9,6 +9,7 @@
 #import "MasterViewController.h"
 
 #import "DetailViewController.h"
+#import "IrishRailDataManager.h"
 #import "Station.h"
 #import "StationCell.h"
 #import <TSMessages/TSMessage.h>
@@ -152,15 +153,16 @@
 
 #pragma mark - IrishRailDataManagerDelegate Methods
 
-- (void)receivedStationData:(NSArray *)stationsArray {
-    LogIt(@"receivedStationData");
-    _objects = [NSMutableArray arrayWithArray:stationsArray];
+- (void)refreshDisplayObjects {
+    LogIt(@"refreshDisplayObjects");
     if ([_objects count] > 0) {
         // Process these objects in to a new array with favourites at the top
         _displayObjects = [NSMutableArray arrayWithArray:_objects];
         _favouriteStationsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"FavouriteStations"];
         for (Station *aStation in _objects) {
             if ([_favouriteStationsArray containsObject:aStation.stationCode]) {
+                // It's a favourite, add it to the top, remove it from the bottom
+                [_displayObjects removeObject:aStation];
                 [_displayObjects insertObject:aStation atIndex:0];
             }
         }
@@ -179,6 +181,11 @@
                                 canBeDismisedByUser:YES];
         [self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:NO];
     }
+}
+- (void)receivedStationData:(NSArray *)stationsArray {
+    LogIt(@"receivedStationData");
+    _objects = [NSMutableArray arrayWithArray:stationsArray];
+    [self refreshDisplayObjects];
 }
 
 - (IBAction)tapInfoButton:(id)sender {

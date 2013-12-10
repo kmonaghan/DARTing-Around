@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Train.h"
+
+@class Train;
 
 @protocol IrishRailDataManagerDelegate <NSObject>
 @optional

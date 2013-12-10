@@ -11,9 +11,10 @@
 #import <AFNetworking/AFNetworking.h>
 #import <TBXML/TBXML.h>
 #import "Station.h"
+#import "Train.h"
 #import "Journey.h"
-#import "Mixpanel.h"
 #import "RouteStop.h"
+#import "Mixpanel.h"
 
 @interface IrishRailDataManager () <NSXMLParserDelegate> {
     NSNumber *stationCount;

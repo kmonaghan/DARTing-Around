@@ -14,6 +14,10 @@
 #import "Mixpanel.h"
 #import <AmazonInsightsSDK/AmazonInsightsSDK.h>
 
+// For testing
+#import <LookBack/LookBack.h>
+
+
 @interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate>
 @end
 
@@ -55,6 +59,9 @@
                                                                              withPrivateKey:AMAZON_PRIVATE_KEY];
     AIAmazonInsights* insights = [AIAmazonInsights insightsWithCredentials:credentials
                                                                withOptions:options];
+    // Lookback
+    [LookBack setupWithAppToken:LOOKBACK_ID];
+    [LookBack lookback].shakeToRecord = YES;
     //
     [self configureReachability];
     //

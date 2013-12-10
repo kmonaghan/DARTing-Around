@@ -1,4 +1,5 @@
+FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/Lookback/lookback-0.4.12"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 $(inherited) ARC_ENABLED
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/HexColors" "${PODS_ROOT}/Headers/TBXML" "${PODS_ROOT}/Headers/TSMessages"
-OTHER_LDFLAGS = -ObjC -lz -framework CoreGraphics -framework MobileCoreServices -framework Security -framework SystemConfiguration
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/HexColors" "${PODS_ROOT}/Headers/Lookback" "${PODS_ROOT}/Headers/TBXML" "${PODS_ROOT}/Headers/TSMessages"
+OTHER_LDFLAGS = -ObjC -lz -framework AVFoundation -framework AudioToolbox -framework CoreGraphics -framework CoreMedia -framework CoreVideo -framework LookBack -framework MediaPlayer -framework MobileCoreServices -framework QuartzCore -framework Security -framework SystemConfiguration
 PODS_ROOT = ${SRCROOT}/Pods
