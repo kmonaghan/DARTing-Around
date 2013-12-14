@@ -17,5 +17,6 @@
 
 - (IBAction)openLinkForTag:(id)sender;
 - (IBAction)tapCloseButt:(id)sender;
+- (IBAction)tapShareButton:(id)sender;
 
 @end

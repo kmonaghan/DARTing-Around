@@ -50,6 +50,17 @@
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
+- (IBAction)tapShareButton:(id)sender {
+    LogIt(@"tapShareButton");
+    NSString *textToShare = @"I made it to the train thanks to #DARTaround, yay!";
+    UIImage *imageToShare = [UIImage imageNamed:@"logo_rounded.png"];
+    NSURL *urlToShare = [NSURL URLWithString:@"http://bazscott.com/dartaround"];
+    NSArray *itemsToShare = @[textToShare, imageToShare, urlToShare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop];
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
 
 
 

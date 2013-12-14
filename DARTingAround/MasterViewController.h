@@ -17,5 +17,7 @@
 @property (nonatomic, retain) IrishRailDataManager *railDataManager;
 
 - (IBAction)tapInfoButton:(id)sender;
+- (IBAction)tapTweetsButton:(id)sender;
+
 
 @end

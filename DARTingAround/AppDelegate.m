@@ -12,11 +12,7 @@
 #import <TSMessages/TSMessage.h>
 #import <NewRelicAgent/NewRelicAgent.h>
 #import "Mixpanel.h"
-#import <AmazonInsightsSDK/AmazonInsightsSDK.h>
-
-// For testing
-#import <LookBack/LookBack.h>
-
+#import <MapKit/MapKit.h>
 
 @interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate>
 @end
@@ -52,16 +48,6 @@
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Application Started" properties:nil];
-    // Amazon
-    id<AIInsightsOptions> options = [AIAmazonInsights optionsWithAllowEventCollection:YES
-                                                                 withAllowWANDelivery:YES];
-    id<AIInsightsCredentials> credentials = [AIAmazonInsights credentialsWithApplicationKey:AMAZON_PUBLIC_KEY
-                                                                             withPrivateKey:AMAZON_PRIVATE_KEY];
-    AIAmazonInsights* insights = [AIAmazonInsights insightsWithCredentials:credentials
-                                                               withOptions:options];
-    // Lookback
-    [LookBack setupWithAppToken:LOOKBACK_ID];
-    [LookBack lookback].shakeToRecord = YES;
     //
     [self configureReachability];
     //
@@ -100,6 +86,25 @@
 {
     LogIt(@"applicationWillTerminate");
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Handle URL Scheme
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    LogIt(@"application openURL");
+    if ([MKDirectionsRequest isDirectionsRequestURL:url]) {
+//        MKDirectionsRequest* directionsInfo = [[MKDirectionsRequest alloc] initWithContentsOfURL:url];
+        // TO DO: Plot and display the route using the
+        //   source and destination properties of directionsInfo.
+        return YES;
+    }
+    else {
+        // Handle other URL types...
+    }
+    return NO;
 }
 
 #pragma mark - BITUpdateManagerDelegate

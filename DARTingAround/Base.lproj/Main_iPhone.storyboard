@@ -69,6 +69,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Stations" id="tQt-TN-PWz">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="3Ad-VC-mw3">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uiy-Pm-KDn">
+                                <rect key="frame" x="16" y="6" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="twitter_bird.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapTweetsButton:" destination="pGg-6v-bdr" eventType="touchUpInside" id="p09-Ct-DcA"/>
+                                </connections>
+                            </button>
+                            <color key="tintColor" red="0.49019607840000001" green="0.76078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Lfh-xz-z1g">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="IZZ-MU-2iZ">
                                 <rect key="frame" x="282" y="11" width="22" height="22"/>
@@ -331,6 +345,9 @@
             <point key="canvasLocation" x="1387" y="64"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="twitter_bird.png" width="32" height="32"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -39,8 +39,16 @@
 		65410D5A1815D39C00A38C98 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 65410D561815D39C00A38C98 /* README.md */; };
 		654618EA180D69B0009CA839 /* Journey.m in Sources */ = {isa = PBXBuildFile; fileRef = 654618E9180D69B0009CA839 /* Journey.m */; };
 		654618EB180D69B0009CA839 /* Journey.m in Sources */ = {isa = PBXBuildFile; fileRef = 654618E9180D69B0009CA839 /* Journey.m */; };
-		65717B01182AC31900D33E4A /* AmazonInsightsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65717B00182AC31900D33E4A /* AmazonInsightsSDK.framework */; };
-		65717B02182AC31A00D33E4A /* AmazonInsightsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65717B00182AC31900D33E4A /* AmazonInsightsSDK.framework */; };
+		6553CC91185D034800B23F06 /* logo_rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 6553CC8F185D034800B23F06 /* logo_rounded.png */; };
+		6553CC92185D034800B23F06 /* logo_rounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 6553CC8F185D034800B23F06 /* logo_rounded.png */; };
+		6553CC93185D034800B23F06 /* logo_rounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6553CC90185D034800B23F06 /* logo_rounded@2x.png */; };
+		6553CC94185D034800B23F06 /* logo_rounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6553CC90185D034800B23F06 /* logo_rounded@2x.png */; };
+		656036981858EB2200A740AE /* twitter_list.html in Resources */ = {isa = PBXBuildFile; fileRef = 656036971858EB2200A740AE /* twitter_list.html */; };
+		656036991858EB2200A740AE /* twitter_list.html in Resources */ = {isa = PBXBuildFile; fileRef = 656036971858EB2200A740AE /* twitter_list.html */; };
+		6560369C1858F33400A740AE /* twitter_bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560369A1858F33400A740AE /* twitter_bird.png */; };
+		6560369D1858F33400A740AE /* twitter_bird.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560369A1858F33400A740AE /* twitter_bird.png */; };
+		6560369E1858F33400A740AE /* twitter_bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560369B1858F33400A740AE /* twitter_bird@2x.png */; };
+		6560369F1858F33400A740AE /* twitter_bird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560369B1858F33400A740AE /* twitter_bird@2x.png */; };
 		65717B05182ACA0C00D33E4A /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 65717B03182ACA0C00D33E4A /* close.png */; };
 		65717B06182ACA0C00D33E4A /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 65717B03182ACA0C00D33E4A /* close.png */; };
 		65717B07182ACA0C00D33E4A /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65717B04182ACA0C00D33E4A /* close@2x.png */; };
@@ -188,7 +196,11 @@
 		65410D561815D39C00A38C98 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		654618E8180D69B0009CA839 /* Journey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Journey.h; path = Data/Journey.h; sourceTree = "<group>"; };
 		654618E9180D69B0009CA839 /* Journey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Journey.m; path = Data/Journey.m; sourceTree = "<group>"; };
-		65717B00182AC31900D33E4A /* AmazonInsightsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AmazonInsightsSDK.framework; sourceTree = "<group>"; };
+		6553CC8F185D034800B23F06 /* logo_rounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_rounded.png; path = Assets/logo_rounded.png; sourceTree = "<group>"; };
+		6553CC90185D034800B23F06 /* logo_rounded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_rounded@2x.png"; path = "Assets/logo_rounded@2x.png"; sourceTree = "<group>"; };
+		656036971858EB2200A740AE /* twitter_list.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = twitter_list.html; sourceTree = "<group>"; };
+		6560369A1858F33400A740AE /* twitter_bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter_bird.png; path = Assets/twitter_bird.png; sourceTree = "<group>"; };
+		6560369B1858F33400A740AE /* twitter_bird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter_bird@2x.png"; path = "Assets/twitter_bird@2x.png"; sourceTree = "<group>"; };
 		65717B03182ACA0C00D33E4A /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		65717B04182ACA0C00D33E4A /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		657214CE1810949300EC7D53 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
@@ -279,15 +291,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6535D4B6180C5FA400A78458 /* CoreLocation.framework in Frameworks */,
 				659B4644181AC8CB00BA1266 /* MapKit.framework in Frameworks */,
+				6535D4B6180C5FA400A78458 /* CoreLocation.framework in Frameworks */,
 				65D3C88A180C17180030908B /* UIKit.framework in Frameworks */,
 				657214D8181095AA00EC7D53 /* QuartzCore.framework in Frameworks */,
 				65EC74581819BC140012C2F1 /* CoreTelephony.framework in Frameworks */,
 				65D3C888180C17180030908B /* CoreGraphics.framework in Frameworks */,
 				65EC747B1819C1090012C2F1 /* AdSupport.framework in Frameworks */,
 				65EC74791819C1010012C2F1 /* Accelerate.framework in Frameworks */,
-				65717B01182AC31900D33E4A /* AmazonInsightsSDK.framework in Frameworks */,
 				65EC745A1819BC230012C2F1 /* libz.dylib in Frameworks */,
 				657214DA181095B400EC7D53 /* SystemConfiguration.framework in Frameworks */,
 				65B1888D18520D380033D131 /* NewRelicAgent.framework in Frameworks */,
@@ -302,7 +313,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65717B02182AC31A00D33E4A /* AmazonInsightsSDK.framework in Frameworks */,
 				65D3C8AB180C17190030908B /* XCTest.framework in Frameworks */,
 				65D3C8AD180C17190030908B /* UIKit.framework in Frameworks */,
 				65D3C8AC180C17190030908B /* Foundation.framework in Frameworks */,
@@ -315,6 +325,7 @@
 		652981F4180CBFA300B1305A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				656036961858EB2200A740AE /* HTML */,
 				652981F5180CBFAD00B1305A /* Images */,
 			);
 			name = Assets;
@@ -323,6 +334,10 @@
 		652981F5180CBFAD00B1305A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6553CC8F185D034800B23F06 /* logo_rounded.png */,
+				6553CC90185D034800B23F06 /* logo_rounded@2x.png */,
+				6560369A1858F33400A740AE /* twitter_bird.png */,
+				6560369B1858F33400A740AE /* twitter_bird@2x.png */,
 				65E79A9C182BC96C00B9FCA2 /* paddy.jpg */,
 				65EC74821819CBB60012C2F1 /* Default-568h.png */,
 				65EC74831819CBB60012C2F1 /* Default-568h@2x.png */,
@@ -371,7 +386,6 @@
 			isa = PBXGroup;
 			children = (
 				65E8C27C18186064002F86B5 /* Setup.h */,
-				65717AFF182AC31900D33E4A /* Amazon */,
 				65EC745B1819C0E50012C2F1 /* Mixpanel */,
 				65410D531815D39C00A38C98 /* NSDate-Time-Ago */,
 				657214CD1810949300EC7D53 /* HockeySDK.embeddedframework */,
@@ -389,12 +403,13 @@
 			path = "NSDate-Time-Ago";
 			sourceTree = "<group>";
 		};
-		65717AFF182AC31900D33E4A /* Amazon */ = {
+		656036961858EB2200A740AE /* HTML */ = {
 			isa = PBXGroup;
 			children = (
-				65717B00182AC31900D33E4A /* AmazonInsightsSDK.framework */,
+				656036971858EB2200A740AE /* twitter_list.html */,
 			);
-			path = Amazon;
+			name = HTML;
+			path = Assets/HTML;
 			sourceTree = "<group>";
 		};
 		657214CD1810949300EC7D53 /* HockeySDK.embeddedframework */ = {
@@ -698,6 +713,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65E8C28518188935002F86B5 /* stopwatch_on.png in Resources */,
+				6553CC93185D034800B23F06 /* logo_rounded@2x.png in Resources */,
 				652C7E2618147AA100E8460F /* LogoAlpha-iPad@2x.png in Resources */,
 				65E79A9D182BC96C00B9FCA2 /* paddy.jpg in Resources */,
 				65E79ABB182C1E6A00B9FCA2 /* StopStop@2x.png in Resources */,
@@ -727,6 +743,7 @@
 				65717B05182ACA0C00D33E4A /* close.png in Resources */,
 				657214D41810949300EC7D53 /* HockeySDKResources.bundle in Resources */,
 				65E79AB9182C1E6A00B9FCA2 /* StopStop.png in Resources */,
+				656036981858EB2200A740AE /* twitter_list.html in Resources */,
 				65410D591815D39C00A38C98 /* README.md in Resources */,
 				65E1E095181413870043B3A1 /* star_off@2x.png in Resources */,
 				65E1E094181413870043B3A1 /* star_off.png in Resources */,
@@ -739,15 +756,18 @@
 				65E8C28118186F15002F86B5 /* stopwatch@2x.png in Resources */,
 				65EC74841819CBB60012C2F1 /* Default-568h.png in Resources */,
 				65E79AB5182C1E6A00B9FCA2 /* StopOrigin.png in Resources */,
+				6553CC91185D034800B23F06 /* logo_rounded.png in Resources */,
 				652C7E2318147AA100E8460F /* Logo-iPad.png in Resources */,
 				65EC74801819CB6F0012C2F1 /* Default@2x.png in Resources */,
 				65043C7D181061050048FBB1 /* LogoAlpha@2x.png in Resources */,
 				652981F8180CBFBD00B1305A /* Logo.png in Resources */,
 				65D3C899180C17190030908B /* Main_iPhone.storyboard in Resources */,
+				6560369C1858F33400A740AE /* twitter_bird.png in Resources */,
 				65D3C890180C17180030908B /* InfoPlist.strings in Resources */,
 				65EC74861819CBB60012C2F1 /* Default-568h@2x.png in Resources */,
 				65E1E096181413870043B3A1 /* star_on.png in Resources */,
 				65E79ABD182C1E6A00B9FCA2 /* StopTiming.png in Resources */,
+				6560369E1858F33400A740AE /* twitter_bird@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,12 +779,15 @@
 				65E8C28618188935002F86B5 /* stopwatch_on.png in Resources */,
 				65410D5A1815D39C00A38C98 /* README.md in Resources */,
 				65E79AB6182C1E6A00B9FCA2 /* StopOrigin.png in Resources */,
+				656036991858EB2200A740AE /* twitter_list.html in Resources */,
 				65E79AAE182C1E6A00B9FCA2 /* StopCurrent.png in Resources */,
+				6553CC92185D034800B23F06 /* logo_rounded.png in Resources */,
 				65717B08182ACA0C00D33E4A /* close@2x.png in Resources */,
 				65EC74871819CBB60012C2F1 /* Default-568h@2x.png in Resources */,
 				65D3C8B5180C17190030908B /* InfoPlist.strings in Resources */,
 				65E79AC0182C1E6A00B9FCA2 /* StopTiming@2x.png in Resources */,
 				65717B06182ACA0C00D33E4A /* close.png in Resources */,
+				6560369F1858F33400A740AE /* twitter_bird@2x.png in Resources */,
 				65E79AB0182C1E6A00B9FCA2 /* StopCurrent@2x.png in Resources */,
 				65E8C28218186F15002F86B5 /* stopwatch@2x.png in Resources */,
 				65E79ABC182C1E6A00B9FCA2 /* StopStop@2x.png in Resources */,
@@ -773,11 +796,13 @@
 				65E79AB8182C1E6A00B9FCA2 /* StopOrigin@2x.png in Resources */,
 				65E8C28018186F15002F86B5 /* stopwatch.png in Resources */,
 				65EC74851819CBB60012C2F1 /* Default-568h.png in Resources */,
+				6560369D1858F33400A740AE /* twitter_bird.png in Resources */,
 				659890C8182B0A9300EEA5E9 /* AboutView.xib in Resources */,
 				65E79AB2182C1E6A00B9FCA2 /* StopDestination.png in Resources */,
 				6582C1E8182C23FD00EDB90D /* StopNext.png in Resources */,
 				65E8C28818188935002F86B5 /* stopwatch_on@2x.png in Resources */,
 				65E79AB4182C1E6A00B9FCA2 /* StopDestination@2x.png in Resources */,
+				6553CC94185D034800B23F06 /* logo_rounded@2x.png in Resources */,
 				65E79ABE182C1E6A00B9FCA2 /* StopTiming.png in Resources */,
 				6582C1EA182C23FD00EDB90D /* StopNext@2x.png in Resources */,
 			);
@@ -978,7 +1003,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/baz/Dropbox/Code/DARTingAround/Libs/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
-					/Users/baz/Dropbox/Code/DARTingAround/Libs/Amazon,
 					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1130,7 +1154,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/baz/Dropbox/Code/DARTingAround/Libs/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
-					/Users/baz/Dropbox/Code/DARTingAround/Libs/Amazon,
 					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1177,7 +1200,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/baz/Dropbox/Code/DARTingAround/Libs/HockeySDK-iOS-3.0.0/HockeySDK.embeddedframework",
-					/Users/baz/Dropbox/Code/DARTingAround/Libs/Amazon,
 					/Users/baz/Dropbox/Code/DARTingAround/Libs/NewRelic,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

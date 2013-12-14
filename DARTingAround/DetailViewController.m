@@ -200,7 +200,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     LogIt(@"viewDidAppear");
     [super viewDidAppear:animated];
+    // Defaults
     _currentStopwatchTimer = [self fetchCurrentWalkToStationTimeFromDefaults];
+    self.directionSegmentedController.selectedSegmentIndex = [[self fetchCurrentSegmentPreferenceFromDefaults] integerValue];
+    //
     if (([_objects count] == 0) && (self.detailStation)) {
         [self refreshTriggered];
         self.directionView.hidden = 0.0;
@@ -358,6 +361,12 @@
         }
     }
     [self updateTable];
+    // Save this segment if it's a favourite station
+    NSArray *favouriteStationsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"FavouriteStations"];
+    if ([favouriteStationsArray containsObject:self.detailStation.stationCode]) {
+        NSNumber *segmentToSave = @(segmentedControl.selectedSegmentIndex);
+        [self saveCurrentSegmentPreferenceToDefaults:segmentToSave];
+    }
 }
 
 - (void)receivedJourneyData:(NSArray *)journeysArray {
@@ -404,6 +413,42 @@
             self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:refreshTitle];
         });
     }
+}
+
+#pragma mark - North/South segments
+
+- (NSNumber *)fetchCurrentSegmentPreferenceFromDefaults {
+    LogIt(@"fetchCurrentSegmentPreferenceFromDefaults");
+    NSNumber *segmentPreference = @1;
+    NSArray *segmentsArray = [NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"NorthSouthSegmentsArray"]];
+    if ([segmentsArray count] > 0) {
+        NSDictionary *existingSegmentsDict = [self findDictionaryWithValueForKey:self.detailStation.stationCode inArray:segmentsArray];
+        if (existingSegmentsDict) {
+            segmentPreference = existingSegmentsDict[@"northOrSouth"];
+        }
+    }
+    return segmentPreference;
+}
+
+- (void)saveCurrentSegmentPreferenceToDefaults:(NSNumber *)time {
+    LogIt(@"saveCurrentSegmentPreferenceToDefaults");
+    NSDictionary *segmentsDict = @{@"stationCode": self.detailStation.stationCode, @"northOrSouth": time};
+    NSMutableArray *segmentsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"NorthSouthSegmentsArray"]];
+    if ([segmentsArray count] > 0) {
+        NSDictionary *existingSegmentsDict = [self findDictionaryWithValueForKey:self.detailStation.stationCode inArray:segmentsArray];
+        if (existingSegmentsDict) {
+            NSUInteger objectIndex = [segmentsArray indexOfObject:existingSegmentsDict];
+            [segmentsArray replaceObjectAtIndex:objectIndex withObject:segmentsDict];
+        }
+        else {
+            [segmentsArray addObject:segmentsDict];
+        }
+    }
+    else {
+        [segmentsArray addObject:segmentsDict];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:segmentsArray forKey:@"NorthSouthSegmentsArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - UITextField and stopwatch methods

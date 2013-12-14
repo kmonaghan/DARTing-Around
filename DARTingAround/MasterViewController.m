@@ -14,6 +14,7 @@
 #import "StationCell.h"
 #import <TSMessages/TSMessage.h>
 #import "AboutViewController.h"
+#import <SVWebViewController/SVModalWebViewController.h>
 
 @interface MasterViewController () <IrishRailDataManagerDelegate> {
     NSMutableArray *_displayObjects;
@@ -192,6 +193,22 @@
     LogIt(@"tapInfoButton");
     AboutViewController *vc = [[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil];
     [self presentViewController:vc animated:YES completion:^{}];
+}
+
+- (IBAction)tapTweetsButton:(id)sender {
+    LogIt(@"tapTweetsButton");
+    
+    NSString *pageString = [[NSBundle mainBundle] pathForResource:@"twitter_list" ofType:@"html"];
+    LogIt(@"tapTweetsButton :: pageString: %@" , pageString);
+    
+    NSString *expandedPath = [pageString stringByExpandingTildeInPath];
+    NSURL *pageURL = [NSURL fileURLWithPath:expandedPath];
+    LogIt(@"tapTweetsButton :: pageURL: %@" , pageURL);
+    
+//    NSURL *URL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"twitter_list" ofType:@"html"] isDirectory:NO];
+    SVModalWebViewController *webViewController = [[SVModalWebViewController alloc] initWithURL:pageURL];
+    webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+    [self presentViewController:webViewController animated:YES completion:NULL];
 }
 
 @end
