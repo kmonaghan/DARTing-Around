@@ -111,10 +111,6 @@
 
 - (NSString *)customDeviceIdentifierForUpdateManager:(BITUpdateManager *)updateManager {
     LogIt(@"customDeviceIdentifierForUpdateManager");
-#ifndef CONFIGURATION_Release
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)])
-        return [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];
-#endif
     return nil;
 }
 
